@@ -1,5 +1,5 @@
 const path = require('path')
-const { getBotConfig } = require(path.join(__dirname, '../util/util'))
+const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/util'))
 const { themecolour } = getBotConfig()
 const { Chall } = require(path.join(__dirname, '../../models/index'))
 
@@ -10,8 +10,8 @@ var chall = {
 	points: 10,
 	author: 'joseph#8210 (Joseph)',
 	flag: '71c281f11cf8f0e07b73bb3fbe884b748f8b01d2bafe2574157ba56ae863bb3a',
-	desc: function(msg) {
-		var descMessage = `
+	desc: async function(msg) {
+		var description = `
 
 			Practice makes perfect...
 
@@ -22,21 +22,15 @@ c = 1021486189212044586570638586701158712798204508596186282309204430430593955239
 		`
 
 		let { challid, title, category, points, author } = chall
-		Chall.findOne({ challid }).then(d => {
-			var solveCount = d.solves.length
+		var d = await Chall.findOne({ challid })
+		var solveCount = d.solves.length
+		var icon_url = 'https://cdn.discordapp.com/avatars/111028987836313600/9a177eb8ca0e33965d894ccc840d3f4b.jpg?size=32'
 
-			var descEmbed = {
-				title: `${title} - ${category} [${points}] (${solveCount} solves)`,
-				description: descMessage,
-				footer: {
-					icon_url: 'https://cdn.discordapp.com/avatars/111028987836313600/9a177eb8ca0e33965d894ccc840d3f4b.jpg?size=32',
-					text: `Author: ${author} | Challenge id: ${challid}`
-				},
-				color: themecolour
-			}
-	
-			msg.channel.send({ embed: descEmbed })
+		var descEmbed = genChallEmbed({
+			challid, title, category, points, author, solveCount, themecolour, description, icon_url
 		})
+
+		msg.channel.send({ embed: descEmbed })
 	}
 }
 

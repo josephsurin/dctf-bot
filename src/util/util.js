@@ -22,7 +22,7 @@ async function getTotalPoints(solves) {
 	return solves.reduce(async (acc, v) => {
 		let { challid } = v
 		let { points } = await Chall.findOne({ challid })
-		return acc + points
+		return (await acc) + points
 	}, 0)
 }
 
@@ -30,9 +30,22 @@ function filterAlphanumeric(str) {
 	return str.replace(/\W/g, '')
 }
 
+function genChallEmbed({challid, title, category, points, author, solveCount, themecolour, description, icon_url}) {
+	return {
+		title: `${title} - ${category} [${points}] (${solveCount} solves)`,
+		description,
+		footer: {
+			icon_url,
+			text: `Author: ${author} | Challenge id: ${challid}`
+		},
+		color: themecolour
+	}
+}
+
 module.exports = {
 	getBotConfig,
 	ordinalSuffix,
 	getTotalPoints,
-	filterAlphanumeric
+	filterAlphanumeric,
+	genChallEmbed
 }
