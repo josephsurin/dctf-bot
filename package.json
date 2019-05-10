@@ -1,0 +1,19 @@
+{
+  "name": "dctf-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "mongodb": "^3.2.4",
+    "mongoose": "^5.5.7"
+  },
+  "devDependencies": {
+    "dotenv": "^8.0.0"
+  }
+}
