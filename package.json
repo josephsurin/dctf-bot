@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "maint": "node ./src/util/maint.js"
   },
   "author": "",
   "license": "ISC",
