@@ -7,7 +7,7 @@ const challSchema = new mongoose.Schema({
 	points: { type: Number, required: true },
 	author: { type: String, required: true },
 	solves: [{
-		userid: String,
+		playerid: String,
 		time: String
 	}]
 })

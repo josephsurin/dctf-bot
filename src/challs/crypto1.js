@@ -9,6 +9,7 @@ var chall = {
 	category: 'Cryptography',
 	points: 10,
 	author: 'joseph#8210 (Joseph)',
+	flag: '71c281f11cf8f0e07b73bb3fbe884b748f8b01d2bafe2574157ba56ae863bb3a',
 	desc: function(msg) {
 		var descMessage = `
 

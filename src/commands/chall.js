@@ -7,7 +7,11 @@ module.exports = function chall(msg, args) {
 
 	var challid = args[0]
 
-	let { desc } = require(path.join(__dirname, '../challs/'+challid))
+	try {
+		let { desc } = require(path.join(__dirname, '../challs/'+challid))
+		desc(msg)
+	} catch(e) {
+		msg.channel.send(`An error occurred trying to get details for challenge ${challid}. Please check for any spelling errors and try again.`)
+	}
 
-	desc(msg)
 }
