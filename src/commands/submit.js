@@ -8,7 +8,12 @@ module.exports = async function chall(msg, args) {
 		Submits a flag for checking
 	*/
 
-	var challid = filterAlphanumeric(args[0])
+	if(msg.guild) {
+		msg.channel.send('This command should only be used in direct messages!')
+		return false
+	}
+
+	var challid = args[0]
 	var flagPlaintext = args[1]
 	var userid = msg.author.id
 
@@ -23,7 +28,7 @@ module.exports = async function chall(msg, args) {
 
 	try {
 
-		let { flag, points } = require(path.join(__dirname, '../challs/'+challid))
+		let { flag, points } = require(path.join(__dirname, '../challs/'+filterAlphanumeric(challid)))
 		var userFlagHashed = crypto.createHash('sha256').update(flagPlaintext).digest('hex')
 
 		if(userFlagHashed == flag) {
