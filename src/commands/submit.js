@@ -1,6 +1,6 @@
 const path = require('path')
 const crypto = require('crypto')
-const { ordinalSuffix, getTotalPoints } = require(path.join(__dirname, '../util/util'))
+const { ordinalSuffix, getTotalPoints, filterAlphanumeric } = require(path.join(__dirname, '../util/util'))
 const { Chall, Player } = require(path.join(__dirname, '../../models/index'))
 
 module.exports = async function chall(msg, args) {
@@ -8,7 +8,7 @@ module.exports = async function chall(msg, args) {
 		Submits a flag for checking
 	*/
 
-	var challid = args[0]
+	var challid = filterAlphanumeric(args[0])
 	var flagPlaintext = args[1]
 	var userid = msg.author.id
 

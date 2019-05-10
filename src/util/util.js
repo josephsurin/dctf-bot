@@ -26,8 +26,13 @@ async function getTotalPoints(solves) {
 	}, 0)
 }
 
+function filterAlphanumeric(str) {
+	return str.replace(/\W/g, '')
+}
+
 module.exports = {
 	getBotConfig,
 	ordinalSuffix,
-	getTotalPoints
+	getTotalPoints,
+	filterAlphanumeric
 }
