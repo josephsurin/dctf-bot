@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const { Chall } = require(path.join(__dirname, '../../models/index'))
+const { Chall, Player } = require(path.join(__dirname, '../../models/index'))
 
 function getBotConfig() {
 	return JSON.parse(fs.readFileSync(path.join(__dirname, '../../botconfig.json')))
@@ -26,6 +26,29 @@ async function getTotalPoints(solves) {
 	}, 0)
 }
 
+async function getRank(player) {
+	var { playerid, solves } = player
+	var totalPoints = await getTotalPoints(solves)
+	var otherPlayers = await Player.find({ playerid: { "$ne": playerid }})
+	var otherTotalPoints = otherPlayers.map(async ({ solves }) => await getTotalPoints(solves))
+	otherTotalPoints.sort()
+	return binarySearchLeft(otherTotalPoints, totalPoints) + 1
+}
+
+function binarySearchLeft(arr, T) {
+	var l = 0
+	var r = arr.length
+	while(l < r) {
+		m = floor((l + r) / 2)
+		if(arr[m] < T) {
+			l = m + 1
+		} else {
+			r = m
+		}
+	}
+	return l
+}
+
 function filterAlphanumeric(str) {
 	return str.replace(/\W/g, '')
 }
@@ -47,5 +70,6 @@ module.exports = {
 	ordinalSuffix,
 	getTotalPoints,
 	filterAlphanumeric,
-	genChallEmbed
+	genChallEmbed,
+	getRank
 }
