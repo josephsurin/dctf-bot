@@ -12,9 +12,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true })
 
 		var tasks = files.map(file => {
 			return new Promise(async (resolve, reject) => {
-				var { challid, title, points, author } = require(path.join(__dirname, '../challs', file))
-				var challData = { challid, title, points, author }
-				var challDoc = await Chall.findOne({ challid: challid })
+				var { challid, title, points, category, author } = require(path.join(__dirname, '../challs', file))
+				var challData = { challid, title, points, category, author }
+				var challDoc = await Chall.findOne({ challid })
 				if(!challDoc) {
 					console.log('creating new document for challenge:', challid)
 					await Chall.create(Object.assign({ solves: [] }, challData))

@@ -44,7 +44,7 @@ function processChallsDisplay(allChalls) {
 	for(var cat in categorySeparated) {
 		field = {
 			name: `**__${cat}__**`,
-			value: categorySeparated[cat].join('\n') + '\n',
+			value: categorySeparated[cat].join('\n'),
 			inline: true
 		}
 		fields.push(field)
