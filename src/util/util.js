@@ -40,12 +40,17 @@ async function getLeaderboard() {
 		} else if(aT > bT) {
 			return -1
 		} else { //scores are equal, so compare latest completion time
-			var at = Math.max(...aT.map(({ time }) => new Date(time).getTime()))
-			var bt = Math.max(...bT.map(({ time }) => new Date(time).getTime()))
+			var at = Math.max(...as.map(({ time }) => new Date(time).getTime()))
+			var bt = Math.max(...bs.map(({ time }) => new Date(time).getTime()))
 			return at - bt //put the smallest max first
 		}
 	})
 	return players
+}
+
+function emojiRank(n) {
+	if(n > 3) return ''
+	return [':first_place:' ,':second_place:', ':third_place:'][n-1]
 }
 
 function filterAlphanumeric(str) {
@@ -71,5 +76,6 @@ module.exports = {
 	filterAlphanumeric,
 	genChallEmbed,
 	getRank,
-	getLeaderboard
+	getLeaderboard,
+	emojiRank
 }

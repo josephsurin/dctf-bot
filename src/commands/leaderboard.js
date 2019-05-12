@@ -1,5 +1,5 @@
 const path = require('path')
-const { getBotConfig, getLeaderboard, getTotalPoints } = require(path.join(__dirname, '../util/util'))
+const { getBotConfig, getLeaderboard, getTotalPoints, emojiRank } = require(path.join(__dirname, '../util/util'))
 
 const { themecolour } = getBotConfig()
 
@@ -13,12 +13,13 @@ module.exports = async function leaderboard(msg, args) {
         var { user: { username } } = await msg.guild.fetchMember(playerid)
         var totalPoints = getTotalPoints(solves)
         var rank = i + 1
-        return `**#${rank}**  ${username}  (${totalPoints} points)\n`
+        return `${emojiRank(rank)}**#${rank}**  ${username}  (${totalPoints} points)`
     }))).join('\n')
 
     var embed = {
         title: 'Leaderboard',
-        description: display,
+        description: '\n\n' + display,
+        timestamp: new Date().toISOString(),
         color: themecolour
     }
 
