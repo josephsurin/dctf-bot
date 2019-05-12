@@ -5,6 +5,8 @@ const submit = require(path.join(__dirname, './submit'))
 const help = require(path.join(__dirname, './help'))
 const profile = require(path.join(__dirname, './profile'))
 const leaderboard = require(path.join(__dirname, './leaderboard'))
+const notes = require(path.join(__dirname, './notes'))
+const about = require(path.join(__dirname, './about'))
 
 module.exports = {
 	challs,
@@ -12,5 +14,7 @@ module.exports = {
 	submit,
 	help,
 	profile,
-	leaderboard
+	leaderboard,
+	notes,
+	about
 }

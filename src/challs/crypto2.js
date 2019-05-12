@@ -28,7 +28,8 @@ var chall = {
 		})
 
 		msg.channel.send({ embed: descEmbed })
-	}
+	},
+	notes: ['https://en.wikipedia.org/wiki/ROT13']
 }
 
 module.exports = chall

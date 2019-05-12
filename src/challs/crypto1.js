@@ -31,7 +31,8 @@ c = 1021486189212044586570638586701158712798204508596186282309204430430593955239
 		})
 
 		msg.channel.send({ embed: descEmbed })
-	}
+	},
+	notes: ['https://en.wikipedia.org/wiki/RSA_(cryptosystem)']
 }
 
 module.exports = chall

@@ -26,7 +26,8 @@ var chall = {
 		})
 
 		msg.channel.send({ embed: descEmbed })
-	}
+	},
+	notes: ['Just because you can\'t see anything with your eyes doesn\'t mean there isn\'t something there!']
 }
 
 module.exports = chall
