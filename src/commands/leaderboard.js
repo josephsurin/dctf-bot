@@ -7,14 +7,13 @@ const { themecolour } = getBotConfig()
 module.exports = async function leaderboard(msg, args) {
 	/*
         Displays the global leaderboard
-        TODO: optimise
     */
     
     var players = await Player.find()
     var display = (await Promise.all(players.map(async player => {
         var { playerid, solves } = player
         var { user: { username } } = await msg.guild.fetchMember(playerid)
-        var totalPoints = await getTotalPoints(solves)
+        var totalPoints = getTotalPoints(solves)
         var rank = await getRank(player)
         return `**#${rank}**  ${username}  (${totalPoints} points)\n`
     }))).join('\n')

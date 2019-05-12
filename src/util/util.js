@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const { Chall, Player } = require(path.join(__dirname, '../../models/index'))
+const { Player } = require(path.join(__dirname, '../../models/index'))
 
 function getBotConfig() {
 	return JSON.parse(fs.readFileSync(path.join(__dirname, '../../botconfig.json')))
@@ -18,19 +18,16 @@ function ordinalSuffix(num) {
 	return num.toString() + suffix
 }
 
-async function getTotalPoints(solves) {
-	return solves.reduce(async (acc, v) => {
-		let { challid } = v
-		let { points } = await Chall.findOne({ challid })
-		return (await acc) + points
-	}, 0)
+function getTotalPoints(solves) {
+	const allChalls = require(path.join(__dirname, '../challs/index'))
+	return solves.reduce((acc, { challid }) => acc + allChalls[challid].points, 0)
 }
 
 async function getRank(player) {
 	var { playerid, solves } = player
-	var totalPoints = await getTotalPoints(solves)
+	var totalPoints = getTotalPoints(solves)
 	var otherPlayers = await Player.find({ playerid: { "$ne": playerid }})
-	var otherTotalPoints = otherPlayers.map(async ({ solves }) => await getTotalPoints(solves))
+	var otherTotalPoints = otherPlayers.map(({ solves }) => getTotalPoints(solves))
 	otherTotalPoints.sort()
 	return binarySearchLeft(otherTotalPoints, totalPoints) + 1
 }
