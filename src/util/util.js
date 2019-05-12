@@ -24,26 +24,28 @@ function getTotalPoints(solves) {
 }
 
 async function getRank(player) {
-	var { playerid, solves } = player
-	var totalPoints = getTotalPoints(solves)
-	var otherPlayers = await Player.find({ playerid: { "$ne": playerid }})
-	var otherTotalPoints = otherPlayers.map(({ solves }) => getTotalPoints(solves))
-	otherTotalPoints.sort()
-	return binarySearchLeft(otherTotalPoints, totalPoints) + 1
+	var leaderboard = await getLeaderboard()
+	return leaderboard.findIndex(({ playerid }) => playerid == player.playerid) + 1
 }
 
-function binarySearchLeft(arr, T) {
-	var l = 0
-	var r = arr.length
-	while(l < r) {
-		m = floor((l + r) / 2)
-		if(arr[m] < T) {
-			l = m + 1
-		} else {
-			r = m
+async function getLeaderboard() {
+	var players = await Player.find()
+	players.sort((a, b) => {
+		var { solves: as } = a
+		var { solves: bs } = b
+		var aT = getTotalPoints(as)
+		var bT = getTotalPoints(bs)
+		if(bT > aT) {
+			return 1
+		} else if(aT > bT) {
+			return -1
+		} else { //scores are equal, so compare latest completion time
+			var at = Math.max(...aT.map(({ time }) => new Date(time).getTime()))
+			var bt = Math.max(...bT.map(({ time }) => new Date(time).getTime()))
+			return at - bt //put the smallest max first
 		}
-	}
-	return l
+	})
+	return players
 }
 
 function filterAlphanumeric(str) {
@@ -68,5 +70,6 @@ module.exports = {
 	getTotalPoints,
 	filterAlphanumeric,
 	genChallEmbed,
-	getRank
+	getRank,
+	getLeaderboard
 }

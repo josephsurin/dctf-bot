@@ -1,6 +1,5 @@
 const path = require('path')
-const { getBotConfig, getTotalPoints, getRank } = require(path.join(__dirname, '../util/util'))
-const { Player } = require(path.join(__dirname, '../../models/index'))
+const { getBotConfig, getLeaderboard, getTotalPoints } = require(path.join(__dirname, '../util/util'))
 
 const { themecolour } = getBotConfig()
 
@@ -9,12 +8,11 @@ module.exports = async function leaderboard(msg, args) {
         Displays the global leaderboard
     */
     
-    var players = await Player.find()
-    var display = (await Promise.all(players.map(async player => {
-        var { playerid, solves } = player
+    var leaderboard = await getLeaderboard()
+    var display = (await Promise.all(leaderboard.map(async ({ playerid, solves }, i) => {
         var { user: { username } } = await msg.guild.fetchMember(playerid)
         var totalPoints = getTotalPoints(solves)
-        var rank = await getRank(player)
+        var rank = i + 1
         return `**#${rank}**  ${username}  (${totalPoints} points)\n`
     }))).join('\n')
 
