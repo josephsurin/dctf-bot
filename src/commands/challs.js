@@ -11,21 +11,21 @@ module.exports = function challs(msg, args) {
 
 	Chall.find().then(allChalls => {
 		
-			if(!allChalls) {
-				msg.channel.send('No challenges found!')
-				return false
-			}
-		
-			var fields = processChallsDisplay(allChalls)
-		
-			var embed = {
-				title: 'Challenges List',
-				fields,
-				timestamp: `${new Date().toISOString()}`,
-				color: themecolour
-			}
+		if(!allChalls) {
+			msg.channel.send('No challenges found!')
+			return false
+		}
+	
+		var fields = processChallsDisplay(allChalls)
+	
+		var embed = {
+			title: 'Challenges List',
+			fields,
+			timestamp: `${new Date().toISOString()}`,
+			color: themecolour
+		}
 
-			msg.channel.send({ embed })
+		msg.channel.send({ embed })
 
 	})		
 }

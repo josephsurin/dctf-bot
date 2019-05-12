@@ -10,6 +10,9 @@ if(process.env.MODE != 'prod') {
 	require('dotenv').config()
 }
 
+//load challenges
+require(path.join(__dirname, './src/challs/index'))
+
 //Database connection
 const dbURI = process.env.DB_URI || 'mongodb://localhost:27017/dctf-bot'
 mongoose.connect(dbURI, { useNewUrlParser: true })

@@ -1,6 +1,7 @@
 const path = require('path')
 const crypto = require('crypto')
-const { ordinalSuffix, getTotalPoints, filterAlphanumeric } = require(path.join(__dirname, '../util/util'))
+const allChalls = require(path.join(__dirname, '../challs/index'))
+const { ordinalSuffix, getTotalPoints } = require(path.join(__dirname, '../util/util'))
 const { Chall, Player } = require(path.join(__dirname, '../../models/index'))
 
 module.exports = async function chall(msg, args) {
@@ -26,9 +27,10 @@ module.exports = async function chall(msg, args) {
 
 	if(!player) player = await Player.create({ playerid: userid, solves: [] })
 
-	try {
+	var challData = allChalls[challid]
 
-		let { flag, points } = require(path.join(__dirname, '../challs/'+filterAlphanumeric(challid)))
+	if(challData) {
+		let { flag, points } = challData
 		var userFlagHashed = crypto.createHash('sha256').update(flagPlaintext).digest('hex')
 
 		if(userFlagHashed == flag) {
@@ -53,8 +55,8 @@ module.exports = async function chall(msg, args) {
 
 			msg.channel.send({ embed })
 
-			await Player.findOneAndUpdate({ playerid: userid }, { solves: newPlayerSolves })
-			await Chall.findOneAndUpdate({ challid }, { solves: newChallSolves })
+			await Player.updateOne({ playerid: userid }, { solves: newPlayerSolves })
+			await Chall.updateOne({ challid }, { solves: newChallSolves })
 		} else {
 			var embed = {
 				title: 'Incorrect flag!',
@@ -64,8 +66,7 @@ module.exports = async function chall(msg, args) {
 
 			msg.channel.send({ embed })
 		}
-	} catch(e) {
-		console.log(e)
+	} else {
 		msg.channel.send(`An error occurred trying to submit flag for challenge ${challid}. Please check for any spelling errors in the challenge id and try again.`)
 	}
 	

@@ -1,5 +1,4 @@
-const path = require('path')
-const { filterAlphanumeric } = require(path.join(__dirname, '../util/util'))
+const allChalls = require('../challs/index')
 
 module.exports = function chall(msg, args) {
 	/*
@@ -8,11 +7,11 @@ module.exports = function chall(msg, args) {
 
 	var challid = args[0]
 
-	try {
-		let { desc } = require(path.join(__dirname, '../challs/'+filterAlphanumeric(challid)))
+	var challData = allChalls[challid]
+	if(challData) {
+		let { desc } = challData
 		desc(msg)
-	} catch(e) {
+	} else {
 		msg.channel.send(`An error occurred trying to get details for challenge ${challid}. Please check for any spelling errors and try again.`)
 	}
-
 }
