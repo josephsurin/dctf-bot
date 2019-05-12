@@ -22,6 +22,12 @@ module.exports = async function profile(msg, args) {
     }
 
     var player = await Player.findOne({ playerid: userid })
+
+    if(!player) {
+        msg.channel.send('That user has no solves yet!')
+        return false
+    }
+
     var formattedProfile = await formatProfile(player)
     var { username } = userid == msg.author.id ? msg.author : (await msg.guild.fetchMember(userid)).user
 
