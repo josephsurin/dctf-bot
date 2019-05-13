@@ -1,6 +1,7 @@
 const path = require('path')
 const { getBotConfig, getRank } = require(path.join(__dirname, '../util/util'))
-const { Chall, Player } = require(path.join(__dirname, '../../models/index'))
+const allChalls = require(path.join(__dirname, '../challs/index'))
+const { Player } = require(path.join(__dirname, '../../models/index'))
 
 const { themecolour } = getBotConfig()
 
@@ -48,10 +49,10 @@ async function formatProfile(player) {
     var s = '__**Solves**__:\n'
     var totalPoints = 0
     var rank = await getRank(player)
-    s += (await Promise.all(solves.map(async ({ challid }) => {
-        var { title, points } = await Chall.findOne({ challid })
+    s += solves.map(({ challid }) => {
+        var { title, points } = allChalls[challid]
         totalPoints += points
         return `**${challid}**: ${title} [${points}]`
-    }))).join('\n')
+    }).join('\n')
     return s + `\nTotal points: ${totalPoints} | Rank: **#${rank}**`
 }

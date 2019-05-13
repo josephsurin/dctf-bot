@@ -12,19 +12,29 @@ mongoose.connect(dbURI, { useNewUrlParser: true })
 
 		var tasks = files.map(file => {
 			return new Promise(async (resolve, reject) => {
-				var { challid, title, points, category, author } = require(path.join(__dirname, '../challs', file))
-				var challData = { challid, title, points, category, author }
+				// var { challid, title, points, category, author } = require(path.join(__dirname, '../challs', file))
+				// var challData = { challid, title, points, category, author }
+				// var challDoc = await Chall.findOne({ challid })
+				// if(!challDoc) {
+				// 	console.log('creating new document for challenge:', challid)
+				// 	await Chall.create(Object.assign({ solves: [] }, challData))
+				// 	return resolve(1)
+				// } else {
+				// 	if(challDoc.title != title || challDoc.points != points || challDoc.author != author) {
+				// 		console.log('updating document for challenge:', challid)
+				// 		await Chall.updateOne({ challid }, challData)
+				// 		return resolve(2)
+				// 	}
+				// }
+				// return resolve(0)
+
+				// only store the challid and solves for each challenge
+				var { challid } = require(path.join(__dirname, '../challs', file))
 				var challDoc = await Chall.findOne({ challid })
 				if(!challDoc) {
 					console.log('creating new document for challenge:', challid)
-					await Chall.create(Object.assign({ solves: [] }, challData))
+					await Chall.create({ challid, solves: [] })
 					return resolve(1)
-				} else {
-					if(challDoc.title != title || challDoc.points != points || challDoc.author != author) {
-						console.log('updating document for challenge:', challid)
-						await Chall.updateOne({ challid }, challData)
-						return resolve(2)
-					}
 				}
 				return resolve(0)
 			})
@@ -32,9 +42,9 @@ mongoose.connect(dbURI, { useNewUrlParser: true })
 
 		Promise.all(tasks).then(changed => {
 			var countAdded = changed.filter(x => x == 1).length
-			var countModified = changed.filter(x => x == 2).length
 			console.log('added', countAdded, 'new challenge documents to the database')
-			console.log('modified', countModified, 'challenge documents in the database')
+			// var countModified = changed.filter(x => x == 2).length
+			// console.log('modified', countModified, 'challenge documents in the database')
 			mongoose.disconnect()
 		})
 	})

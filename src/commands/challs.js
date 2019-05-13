@@ -1,5 +1,6 @@
 const path = require('path')
 const { getBotConfig } = require(path.join(__dirname, '../util/util'))
+const allChalls = require(path.join(__dirname, '../challs/index'))
 const { Chall } = require(path.join(__dirname, '../../models/index'))
 
 const { themecolour } = getBotConfig()
@@ -9,14 +10,14 @@ module.exports = function challs(msg, args) {
 		Lists available challenges
 	*/
 
-	Chall.find().then(allChalls => {
+	Chall.find().sort('challid').then(dbChalls => {
 		
-		if(!allChalls) {
+		if(!dbChalls) {
 			msg.channel.send('No challenges found!')
 			return false
 		}
 	
-		var fields = processChallsDisplay(allChalls)
+		var fields = processChallsDisplay(dbChalls)
 	
 		var embed = {
 			title: 'Challenges List',
@@ -30,9 +31,10 @@ module.exports = function challs(msg, args) {
 	})		
 }
 
-function processChallsDisplay(allChalls) {
+function processChallsDisplay(dbChalls) {
 	var categorySeparated = {}
-	allChalls.forEach(chall => {
+	dbChalls.forEach(({ challid, solves }) => {
+		var chall = Object.assign({ solves }, allChalls[challid])
 		if(!categorySeparated[chall.category]) {
 			categorySeparated[chall.category] = [processChallDisplay(chall)]
 		} else {
