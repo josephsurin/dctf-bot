@@ -4,18 +4,31 @@ const { themecolour } = getBotConfig()
 const { Chall } = require(path.join(__dirname, '../../models/index'))
 
 var chall = {
-	challid: 'crypto1',
-	title: 'ROT13',
+	challid: 'crypto5',
+	title: 'RSA Level 3',
 	category: 'Cryptography',
-	points: 5,
+	points: 25,
 	author: 'joseph#8210 (Joseph)',
-	flag: '569d0e82442ef1900ee8ee49fc9b818494172c34277c52389ee170f40625446c',
+	flag: '26dee7fe6bc26c84359be844be7697c0908ea4ac2fce4e3e6d9c3ae99978b4ab',
 	desc: async function(msg) {
 		var description = `
 
-			Sanity check...
+            I'm trying to send a secret message to three of my friends... Am I doing it right?
 
-			\`\`\`ZVFPPGS{ebg13_vfa'g_irel_vagrerfgvat}\`\`\`
+			The values are [here](https://paste.ee/r/SQGxm/0).
+
+            \`\`\`python
+from Crypto.Util.number import getPrime, bytes_to_long
+from math import gcd
+
+n1, n2, n3 = getPrime(1024), getPrime(1024), getPrime(1024)
+assert(gcd(n1, n2) == gcd(n1, n3) == gcd(n2, n3) == 1)
+e = 3
+
+flag = b'MISCCTF{this is not the flag by the way}'
+m = bytes_to_long(flag)
+
+c1, c2, c3 = pow(m, e, n1), pow(m, e, n2), pow(m, e, n3)\`\`\`
 		`
 
 		let { challid, title, category, points, author } = chall
@@ -29,7 +42,7 @@ var chall = {
 
 		msg.channel.send({ embed: descEmbed })
 	},
-	notes: ['https://en.wikipedia.org/wiki/ROT13']
+	notes: ['https://en.wikipedia.org/wiki/Chinese_remainder_theorem']
 }
 
 module.exports = chall
