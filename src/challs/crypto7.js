@@ -26,7 +26,7 @@ p, q = getPrime(1024), getPrime(1024)
 n = p * q
 e = 3
 
-padded = flag.ljust(256, b'\x00')
+padded = flag.ljust(256, b'\\x00')
 m = bytes_to_long(padded)
 
 c = pow(m, e, n)
