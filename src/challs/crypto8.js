@@ -16,7 +16,8 @@ var chall = {
 
 			The code is [here](https://drive.google.com/open?id=1VbgaSNDyiHrOh6cx1aJOhph9XQW5J1Dm)
 
-			\`\`\`ciphertext = '0x1944cccfb862a01424b14103b06e3ae90f586cb4ca128ba4f0b50c9a6b673e1bd745af2ec53e25e181536c1'\`\`\`
+			\`\`\`python
+encrypted_flag  = '0x1944cccfb862a01424b14103b06e3ae90f586cb4ca128ba4f0b50c9a6b673e1bd745af2ec53e25e181536c1'\`\`\`
 		`
 
 		let { challid, title, category, points, author } = chall
