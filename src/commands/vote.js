@@ -17,7 +17,7 @@ module.exports = async function vote(msg, args) {
         msg.channel.send('Invalid challenge id.')
         return false
     }
-    if(isNaN(voteval)) {
+    if(isNaN(voteval) || voteval < 1 || voteval > 10) {
         msg.channel.send('Invalid vote score. Please specify a value from (easy) 1 to 10 (hard) inclusive.')
         return false
     }
