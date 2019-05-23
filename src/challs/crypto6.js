@@ -24,11 +24,11 @@ var chall = {
 
 		let { challid, title, category, points, author } = chall
 		var d = await Chall.findOne({ challid })
-		var solveCount = d.solves.length
+		var { solves, votes } = d
 		var icon_url = 'https://cdn.discordapp.com/avatars/111028987836313600/9a177eb8ca0e33965d894ccc840d3f4b.jpg?size=32'
 
 		var descEmbed = genChallEmbed({
-			challid, title, category, points, author, solveCount, themecolour, description, icon_url
+			challid, title, category, points, author, solves, themecolour, description, icon_url, votes
 		})
 
 		msg.channel.send({ embed: descEmbed })

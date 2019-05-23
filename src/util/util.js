@@ -57,9 +57,9 @@ function filterAlphanumeric(str) {
 	return str.replace(/\W/g, '')
 }
 
-function genChallEmbed({challid, title, category, points, author, solveCount, themecolour, description, icon_url}) {
+function genChallEmbed({challid, title, category, points, author, solves, themecolour, description, icon_url, votes}) {
 	return {
-		title: `${title} - ${category} [${points}] (${solveCount} solves)`,
+		title: `${title} - ${category} [${points}] (${solves.length} solves) {Average Vote: ${avgVote(votes)}}`,
 		description,
 		footer: {
 			icon_url,
@@ -67,6 +67,13 @@ function genChallEmbed({challid, title, category, points, author, solveCount, th
 		},
 		color: themecolour
 	}
+}
+
+function avgVote(votes) {
+	if(votes.length == 0) {
+		return '?'
+	}
+	return (votes.reduce((acc, { vote }) => acc + vote, 0) / votes.length).toFixed(2)
 }
 
 async function hasSolved(playerid, challid) {
