@@ -33,7 +33,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true })
 				var challDoc = await Chall.findOne({ challid })
 				if(!challDoc) {
 					console.log('creating new document for challenge:', challid)
-					await Chall.create({ challid, solves: [] })
+					await Chall.create({ challid, solves: [], votes: [] })
 					return resolve(1)
 				}
 				return resolve(0)

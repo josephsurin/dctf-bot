@@ -69,6 +69,16 @@ function genChallEmbed({challid, title, category, points, author, solveCount, th
 	}
 }
 
+async function hasSolved(playerid, challid) {
+	const { solves } = await Player.findOne({ playerid })
+	var solveIndex = solves.findIndex(s => s.challid == challid)
+	if(solveIndex == -1) {
+		return false
+	} else {
+		return true
+	}
+}
+
 module.exports = {
 	getBotConfig,
 	ordinalSuffix,
@@ -77,5 +87,6 @@ module.exports = {
 	genChallEmbed,
 	getRank,
 	getLeaderboard,
-	emojiRank
+	emojiRank,
+	hasSolved
 }

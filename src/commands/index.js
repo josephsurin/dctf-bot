@@ -7,6 +7,7 @@ const profile = require(path.join(__dirname, './profile'))
 const leaderboard = require(path.join(__dirname, './leaderboard'))
 const notes = require(path.join(__dirname, './notes'))
 const about = require(path.join(__dirname, './about'))
+const vote = require(path.join(__dirname, './vote'))
 
 module.exports = {
 	challs,
@@ -16,5 +17,6 @@ module.exports = {
 	profile,
 	leaderboard,
 	notes,
-	about
+	about,
+	vote
 }

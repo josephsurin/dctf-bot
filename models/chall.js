@@ -5,6 +5,10 @@ const challSchema = new mongoose.Schema({
 	solves: [{
 		playerid: String,
 		time: String
+	}],
+	votes: [{
+		playerid: String,
+		vote: Number
 	}]
 })
 
