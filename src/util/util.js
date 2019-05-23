@@ -58,8 +58,9 @@ function filterAlphanumeric(str) {
 }
 
 function genChallEmbed({challid, title, category, points, author, solves, themecolour, description, icon_url, votes}) {
+	var cat  = /-/.test(category) ? category.split('-')[0] : category
 	return {
-		title: `${title} - ${category} [${points}] (${solves.length} solves) {Average Vote: ${avgVote(votes)}}`,
+		title: `${title} - ${cat} [${points}] (${solves.length} solves) {Average Vote: ${avgVote(votes)}}`,
 		description,
 		footer: {
 			icon_url,

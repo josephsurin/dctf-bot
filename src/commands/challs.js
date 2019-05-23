@@ -44,8 +44,9 @@ function processChallsDisplay(dbChalls) {
 
 	fields = []
 	for(var cat in categorySeparated) {
+		var name = /-/.test(cat) ? `**__${cat.split('-')[0]} (continued)__**` : `**__${cat}__**`
 		field = {
-			name: `**__${cat}__**`,
+			name,
 			value: categorySeparated[cat].join('\n'),
 			inline: true
 		}
