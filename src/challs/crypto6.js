@@ -7,7 +7,7 @@ var chall = {
 	challid: 'crypto6',
 	title: 'Useless Sage',
 	category: 'Cryptography',
-	points: 100,
+	points: 80,
 	author: 'joseph#8210 (Joseph)',
 	flag: '635f8baf9de328982887334fb3f1943bb3a004eaaec7fed688f41f9c2a9c66ef',
 	desc: async function(msg) {
