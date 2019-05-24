@@ -13,7 +13,8 @@ module.exports = async function profile(msg, args) {
     var searchUser = args[0]
     var userid = msg.author.id
     if(searchUser) {
-        var searchResult = msg.guild.members.find(gm =>  [gm.displayName, gm.nickname, gm.user.username].includes(searchUser))
+        var searchResult = msg.guild.members.find(gm =>  ([gm.displayName, gm.nickname, gm.user.username].includes(searchUser) ||
+        gm.displayName.startsWith(searchUser) || gm.nickname.startsWith(searchUser) || gm.nickname.startsWith(searchUser)))
         if(!searchResult) {
             msg.channel.send('No user found with that name!')
             return false
@@ -25,7 +26,7 @@ module.exports = async function profile(msg, args) {
     var player = await Player.findOne({ playerid: userid })
 
     if(!player) {
-        msg.channel.send('That user has no solves yet!')
+        msg.channel.send('That user has no submissions yet!')
         return false
     }
 
