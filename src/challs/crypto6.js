@@ -8,7 +8,8 @@ var chall = {
 	title: 'Useless Sage',
 	category: 'Cryptography',
 	points: 80,
-	author: 'joseph#8210 (Joseph)',
+	authorid: '111028987836313600',
+    authorName: 'Joseph',
 	flag: '635f8baf9de328982887334fb3f1943bb3a004eaaec7fed688f41f9c2a9c66ef',
 	desc: async function(msg) {
 		var description = `
@@ -22,10 +23,12 @@ var chall = {
             The code is [here](https://drive.google.com/open?id=1u59omURSF1-OSY___sbtxSVQePuYfmor)
 		`
 
-		let { challid, title, category, points, author } = chall
+		let { challid, title, category, points, authorid, authorName } = chall
 		var d = await Chall.findOne({ challid })
 		var { solves, votes } = d
-		var icon_url = 'https://cdn.discordapp.com/avatars/111028987836313600/9a177eb8ca0e33965d894ccc840d3f4b.jpg?size=32'
+		var authorUser = await global.djsclient.fetchUser(authorid)
+        var { username, discriminator, displayAvatarURL: icon_url } = authorUser
+        var author = `${username}#${discriminator} (${authorName})`
 
 		var descEmbed = genChallEmbed({
 			challid, title, category, points, author, solves, themecolour, description, icon_url, votes

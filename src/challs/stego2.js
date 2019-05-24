@@ -8,7 +8,8 @@ var chall = {
 	title: 'Dog',
 	category: 'Steganography',
 	points: 40,
-	author: 'joseph#8210 (Joseph)',
+	authorid: '111028987836313600',
+    authorName: 'Joseph',
 	flag: '2d404449ec687f43b4aee755ddc01a30a665972662bb6dd355e0277cbff004cd',
 	desc: async function(msg) {
 		var description = `
@@ -16,10 +17,12 @@ var chall = {
 			I think [this dog](https://drive.google.com/open?id=1MMo64yB4yAUBEKGkAnzfMp4PTm8EE04q) is trying to tell me something of little significance, but I can't understand him one bit! Can you help me?
 		`
 
-		let { challid, title, category, points, author } = chall
+		let { challid, title, category, points, authorid, authorName } = chall
 		var d = await Chall.findOne({ challid })
 		var { solves, votes } = d
-		var icon_url = 'https://cdn.discordapp.com/avatars/111028987836313600/9a177eb8ca0e33965d894ccc840d3f4b.jpg?size=32'
+		var authorUser = await global.djsclient.fetchUser(authorid)
+        var { username, discriminator, displayAvatarURL: icon_url } = authorUser
+        var author = `${username}#${discriminator} (${authorName})`
 
 		var descEmbed = genChallEmbed({
 			challid, title, category, points, author, solves, themecolour, description, icon_url, votes

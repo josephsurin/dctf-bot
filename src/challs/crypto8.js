@@ -8,7 +8,8 @@ var chall = {
 	title: 'Linear Cipher',
 	category: 'Cryptography',
 	points: 30,
-	author: 'joseph#8210 (Joseph)',
+	authorid: '111028987836313600',
+    authorName: 'Joseph',
 	flag: '352e70933cf868fe2c4f32bc5a6c1fc3397e92243c6178cb7d78e159061c4ead',
 	desc: async function(msg) {
 		var description = `
@@ -20,10 +21,12 @@ var chall = {
 encrypted_flag  = '0x1944cccfb862a01424b14103b06e3ae90f586cb4ca128ba4f0b50c9a6b673e1bd745af2ec53e25e181536c1'\`\`\`
 		`
 
-		let { challid, title, category, points, author } = chall
+		let { challid, title, category, points, authorid, authorName } = chall
 		var d = await Chall.findOne({ challid })
 		var { solves, votes } = d
-		var icon_url = 'https://cdn.discordapp.com/avatars/111028987836313600/9a177eb8ca0e33965d894ccc840d3f4b.jpg?size=32'
+		var authorUser = await global.djsclient.fetchUser(authorid)
+        var { username, discriminator, displayAvatarURL: icon_url } = authorUser
+        var author = `${username}#${discriminator} (${authorName})`
 
 		var descEmbed = genChallEmbed({
 			challid, title, category, points, author, solves, themecolour, description, icon_url, votes

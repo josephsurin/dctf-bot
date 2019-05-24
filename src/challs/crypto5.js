@@ -8,7 +8,8 @@ var chall = {
 	title: 'RSA Level 3',
 	category: 'Cryptography',
 	points: 25,
-	author: 'joseph#8210 (Joseph)',
+	authorid: '111028987836313600',
+    authorName: 'Joseph',
 	flag: '26dee7fe6bc26c84359be844be7697c0908ea4ac2fce4e3e6d9c3ae99978b4ab',
 	desc: async function(msg) {
 		var description = `
@@ -31,10 +32,12 @@ m = bytes_to_long(flag)
 c1, c2, c3 = pow(m, e, n1), pow(m, e, n2), pow(m, e, n3)\`\`\`
 		`
 
-		let { challid, title, category, points, author } = chall
+		let { challid, title, category, points, authorid, authorName } = chall
 		var d = await Chall.findOne({ challid })
 		var { solves, votes } = d
-		var icon_url = 'https://cdn.discordapp.com/avatars/111028987836313600/9a177eb8ca0e33965d894ccc840d3f4b.jpg?size=32'
+		var authorUser = await global.djsclient.fetchUser(authorid)
+        var { username, discriminator, displayAvatarURL: icon_url } = authorUser
+        var author = `${username}#${discriminator} (${authorName})`
 
 		var descEmbed = genChallEmbed({
 			challid, title, category, points, author, solves, themecolour, description, icon_url, votes

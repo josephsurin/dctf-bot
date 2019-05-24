@@ -8,7 +8,8 @@ var chall = {
 	title: 'RSA Level 0',
 	category: 'Cryptography',
 	points: 10,
-	author: 'joseph#8210 (Joseph)',
+	authorid: '111028987836313600',
+    authorName: 'Joseph',
 	flag: '71c281f11cf8f0e07b73bb3fbe884b748f8b01d2bafe2574157ba56ae863bb3a',
 	desc: async function(msg) {
 		var description = `
@@ -21,10 +22,12 @@ e = 65537
 c = 10214861892120445865706385867011587127982045085961862823092044304305939552393842554545454239786761326736651737891182342548588924080704628751092756140318269823467049441874858968317487329891259238315363624456336080755478927026710723688585757247557931475102582577748644922975623505161093260928142607959549309978930068369267414123151654788124670818474772668793649593871423650063919771786368027770837971886168517190007399980700311805376224527838285697981316120969399711890612253130626678712362973178914520342831921909615107294366566624156568568106436986386109053466371294944512232622369387736598408368770428882577777409409\`\`\`
 		`
 
-		let { challid, title, category, points, author } = chall
+		let { challid, title, category, points, authorid, authorName } = chall
 		var d = await Chall.findOne({ challid })
 		var { solves, votes } = d
-		var icon_url = 'https://cdn.discordapp.com/avatars/111028987836313600/9a177eb8ca0e33965d894ccc840d3f4b.jpg?size=32'
+		var authorUser = await global.djsclient.fetchUser(authorid)
+        var { username, discriminator, displayAvatarURL: icon_url } = authorUser
+        var author = `${username}#${discriminator} (${authorName})`
 
 		var descEmbed = genChallEmbed({
 			challid, title, category, points, author, solves, themecolour, description, icon_url, votes

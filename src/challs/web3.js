@@ -8,7 +8,8 @@ var chall = {
 	title: 'JavaScript is fun',
 	category: 'Web',
 	points: 20,
-	author: 'joseph#8210 (Joseph)',
+	authorid: '111028987836313600',
+    authorName: 'Joseph',
 	flag: '2ea9b7effd5fbde272f623b78ae37715f28abd5927029207d69a30a428098f02',
 	desc: async function(msg) {
 		var description = `
@@ -18,10 +19,12 @@ var chall = {
             https://miscctf-web.herokuapp.com/web3/
 		`
 
-		let { challid, title, category, points, author } = chall
+		let { challid, title, category, points, authorid, authorName } = chall
 		var d = await Chall.findOne({ challid })
 		var { solves, votes } = d
-		var icon_url = 'https://cdn.discordapp.com/avatars/111028987836313600/9a177eb8ca0e33965d894ccc840d3f4b.jpg?size=32'
+		var authorUser = await global.djsclient.fetchUser(authorid)
+        var { username, discriminator, displayAvatarURL: icon_url } = authorUser
+        var author = `${username}#${discriminator} (${authorName})`
 
 		var descEmbed = genChallEmbed({
 			challid, title, category, points, author, solves, themecolour, description, icon_url, votes

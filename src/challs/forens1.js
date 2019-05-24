@@ -4,26 +4,25 @@ const { themecolour } = getBotConfig()
 const { Chall } = require(path.join(__dirname, '../../models/index'))
 
 var chall = {
-	challid: 'rev1',
-	title: 'Basics',
-	category: 'Reversing',
-	points: 5,
-	authorid: '111028987836313600',
-    authorName: 'Joseph',
-	flag: 'e97fc87521b09c86f1819f4e28daff8ed0b05f9ea1b40375ab3b83ca40e69c38',
+	challid: 'forens1',
+	title: 'Universal',
+	category: 'Forensics',
+	points: 10,
+	authorid: '219792140472025089',
+	authorName: 'John',
+	flag: '0bf5c2e03874ae2c909126dabd2d3637c5c731680daf80d6ebe6a4493afd57a3',
 	desc: async function(msg) {
 		var description = `
-		[Know your basics!](https://drive.google.com/open?id=1a6i7-3J-gM-IjoN-W8foWgewKUIGfCtv)
+		[Can you find the flag?](https://drive.google.com/open?id=1poM7l97kkI6rY5Tto8mhxLF4S2MG17Uv)
 
-		Note: Flag is MISCCTF{secret code}
 		`
 
 		let { challid, title, category, points, authorid, authorName } = chall
 		var d = await Chall.findOne({ challid })
 		var { solves, votes } = d
 		var authorUser = await global.djsclient.fetchUser(authorid)
-        var { username, discriminator, displayAvatarURL: icon_url } = authorUser
-        var author = `${username}#${discriminator} (${authorName})`
+		var { username, discriminator, displayAvatarURL: icon_url } = authorUser
+		var author = `${username}#${discriminator} (${authorName})`
 
 		var descEmbed = genChallEmbed({
 			challid, title, category, points, author, solves, themecolour, description, icon_url, votes
@@ -31,7 +30,7 @@ var chall = {
 
 		msg.channel.send({ embed: descEmbed })
 	},
-	notes: ['http://beta.rada.re/en/latest/']
+	notes: ['https://www.wireshark.org/']
 }
 
 module.exports = chall
