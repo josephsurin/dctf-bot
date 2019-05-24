@@ -1,7 +1,8 @@
 const path = require('path')
 const crypto = require('crypto')
 const allChalls = require(path.join(__dirname, '../challs/index'))
-const { ordinalSuffix, getTotalPoints } = require(path.join(__dirname, '../util/util'))
+const { ordinalSuffix, getTotalPoints, getBotConfig } = require(path.join(__dirname, '../util/util'))
+const { cmdprefix } = getBotConfig()
 const { Chall, Player } = require(path.join(__dirname, '../../models/index'))
 
 module.exports = async function chall(msg, args) {
@@ -48,7 +49,9 @@ module.exports = async function chall(msg, args) {
 			var embed = {
 				title: 'Congratulations!',
 				description: `You were the **${ordinalSuffix(newChallSolves.length)}** solver for ${challid}!
-				You gained ${points} points and now have a total of **${totalPoints}** points.`,
+				You gained ${points} points and now have a total of **${totalPoints}** points.
+				
+				Please remember to vote on the difficulty of this challenge! You can do this by typing \`${cmdprefix}vote ${challid} <vote value>\` where \`<vote value>\` is an integer from (easy) 1 to 10 (hard).`,
 				timestamp: solveTime,
 				color: 0x62fc65
 			}
