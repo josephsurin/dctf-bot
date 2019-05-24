@@ -32,6 +32,7 @@ client.on('message', msg => {
 	if(msg.content.startsWith(cmdprefix)) {
 		var command = msg.content.split(cmdprefix)[1].split(' ')[0]
 		if(commandsList.includes(command)) {
+			console.log('COMMAND LOG:', msg.author.username + '#' + msg.author.discriminator, msg.content)
 			var args = msg.content.split(' ').slice(1)
 			commands[command](msg, args)
 		}
