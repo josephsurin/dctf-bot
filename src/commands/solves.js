@@ -35,6 +35,6 @@ async function formatSolves(solves) {
     return (await Promise.all(solves.map(async ({ playerid, time }, i) => {
         var { username, discriminator } = await global.djsclient.fetchUser(playerid)
         var rank = i + 1
-        return `**#${rank}** ${username}#${discriminator} (${new Date(time).toLocaleString()})`
+        return `**#${rank}** ${username}#${discriminator} (${new Date(time).toLocaleString('en-AU', { timeZone: 'Australia/Melbourne' })})`
     }))).join('\n')
 }
