@@ -31,7 +31,7 @@ c = 2017372737662073703271064200477304426676121918192992389806431123907504908914
 
 		msg.channel.send({ embed: descEmbed })
 	},
-	notes: ['https://en.wikipedia.org/wiki/Integer_factorization']
+	notes: []
 }
 
 module.exports = chall
