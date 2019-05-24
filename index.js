@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
+global.djsclient = client
+
 const { getBotConfig } = require(path.join(__dirname, './src/util/util'))
 const { cmdprefix } = getBotConfig()
 
