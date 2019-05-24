@@ -10,7 +10,7 @@ module.exports = async function leaderboard(msg, args) {
     
     var leaderboard = await getLeaderboard()
     var display = (await Promise.all(leaderboard.map(async ({ playerid, solves }, i) => {
-        var { user: { username } } = await msg.guild.fetchMember(playerid)
+        var { username } = await global.djsclient.fetchUser(playerid)
         var totalPoints = getTotalPoints(solves)
         var rank = i + 1
         return `${emojiRank(rank)}**#${rank}**  ${username}  (${totalPoints} points)`

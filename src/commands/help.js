@@ -16,7 +16,8 @@ Available Commands:
 	${cmdprefix}submit <challid> <flag> - submits a flag for checking (this can only be used in a direct message with the bot)
 	${cmdprefix}vote <challid> <vote value> - vote on the difficulty of a challenge, on a scale from (easy) 1 to 10 (hard)
 	${cmdprefix}profile (user) - displays the profile of the specified user, or the person who issued the command if not specified
-	${cmdprefix}leaderboard - displays the server leaderboard
+	${cmdprefix}leaderboard - displays the global leaderboard
+	${cmdprefix}solves <challid> - displays the solvers and their time of solving for a challenge
 	${cmdprefix}notes <challid> - displays notes/resources/hints for a challenge (only use this if you're stuck!)
 	${cmdprefix}about - displays information about the bot\`\`\``)
 
