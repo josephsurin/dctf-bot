@@ -6,7 +6,7 @@ const { Chall } = require(path.join(__dirname, '../../models/index'))
 var chall = {
 	challid: 'crypto10',
 	title: 'RSA Level 6',
-	category: 'Cryptography-2',
+	category: 'Cryptography',
 	points: 20,
 	author: 'joseph#8210 (Joseph)',
 	flag: '794d71de1d47901e6d7f886947363f814e8893eb2be978454d15de1d3f5eb33f',

@@ -43,11 +43,12 @@ function processChallsDisplay(dbChalls) {
 	})
 
 	fields = []
+	// for natural sorting
+	var collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' })
 	for(var cat in categorySeparated) {
-		var name = /-/.test(cat) ? `**__${cat.split('-')[0]} (continued)__**` : `**__${cat}__**`
 		field = {
-			name,
-			value: categorySeparated[cat].join('\n'),
+			name: `**__${cat}__**`,
+			value: categorySeparated[cat].sort(collator.compare).join('\n'),
 			inline: true
 		}
 		fields.push(field)
