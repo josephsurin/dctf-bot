@@ -15,7 +15,7 @@ module.exports = async function notes(msg, args) {
         title: `About`,
 		description: `${botname} is a Discord CTF bot created by ${author}
 		
-		Type ${cmdprefix}help for a list of commands.
+        Type ${cmdprefix}help for a list of commands.
 		
 		The code for the bot is open source (https://github.com/josephsurin/dctf-bot)
 		and makes use of the [discord.js](https://discord.js.org/) library.

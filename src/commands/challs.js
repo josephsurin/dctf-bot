@@ -3,7 +3,7 @@ const { getBotConfig } = require(path.join(__dirname, '../util/util'))
 const allChalls = require(path.join(__dirname, '../challs/index'))
 const { Chall } = require(path.join(__dirname, '../../models/index'))
 
-const { themecolour } = getBotConfig()
+const { themecolour, flagformat } = getBotConfig()
 
 module.exports = function challs(msg, args) {
 	/*
@@ -21,6 +21,8 @@ module.exports = function challs(msg, args) {
 	
 		var embed = {
 			title: 'Challenges List',
+			description: `
+			The flag format is \`${flagformat}\` unless otherwise specified.`,
 			fields,
 			timestamp: `${new Date().toISOString()}`,
 			color: themecolour
