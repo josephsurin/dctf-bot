@@ -6,7 +6,7 @@ var chall = {
     challid: 'crypto7',
     title: 'RSA Level 4',
     category: 'Cryptography',
-    points: 35,
+    points: 30,
     authorid: '111028987836313600',
     authorName: 'Joseph',
     flag: '6e42cd94487796b7332a38aa5f78d6bc376a971adb60806172a745a58941c0eb',
