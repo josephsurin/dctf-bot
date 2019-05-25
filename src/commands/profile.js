@@ -13,8 +13,7 @@ module.exports = async function profile(msg, args) {
     var searchUser = args[0]
     var userid = msg.author.id
     if(searchUser) {
-        var searchResult = msg.guild.members.find(gm =>  ([gm.displayName, gm.nickname, gm.user.username].includes(searchUser) ||
-        gm.displayName.startsWith(searchUser) || gm.nickname.startsWith(searchUser) || gm.nickname.startsWith(searchUser)))
+        var searchResult = msg.guild.members.find(gm => matchUser(searchUser, gm))
         if(!searchResult) {
             msg.channel.send('No user found with that name!')
             return false
@@ -56,4 +55,9 @@ async function formatProfile(player) {
         return `**${challid}**: ${title} [${points}]`
     }).join('\n')
     return s + `\nTotal points: ${totalPoints} | Rank: **#${rank}**`
+}
+
+function matchUser(search, guildMember) {
+    var { displayName, nickname, user: { username } } = guildMember
+    return username.startsWith(search) || displayName.startsWith(search) || (nickname && nickname.startsWith(search))
 }
