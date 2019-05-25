@@ -4,37 +4,37 @@ const { themecolour } = getBotConfig()
 const { Chall } = require(path.join(__dirname, '../../models/index'))
 
 var chall = {
-	challid: 'crypto8',
-	title: 'Linear Cipher',
-	category: 'Cryptography',
-	points: 30,
-	authorid: '111028987836313600',
+    challid: 'crypto8',
+    title: 'Linear Cipher',
+    category: 'Cryptography',
+    points: 30,
+    authorid: '111028987836313600',
     authorName: 'Joseph',
-	flag: '352e70933cf868fe2c4f32bc5a6c1fc3397e92243c6178cb7d78e159061c4ead',
-	desc: async function(msg) {
-		var description = `
-			Here's a fun little cipher warmup exercise. Decipher the ciphertext and get your flag!
+    flag: '352e70933cf868fe2c4f32bc5a6c1fc3397e92243c6178cb7d78e159061c4ead',
+    desc: async function(msg) {
+        var description = `
+            Here's a fun little cipher warmup exercise. Decipher the ciphertext and get your flag!
 
-			The code is [here](https://drive.google.com/open?id=1VbgaSNDyiHrOh6cx1aJOhph9XQW5J1Dm)
+            The code is [here](https://drive.google.com/open?id=1VbgaSNDyiHrOh6cx1aJOhph9XQW5J1Dm)
 
-			\`\`\`python
+            \`\`\`python
 encrypted_flag  = '0x1944cccfb862a01424b14103b06e3ae90f586cb4ca128ba4f0b50c9a6b673e1bd745af2ec53e25e181536c1'\`\`\`
-		`
+        `
 
-		let { challid, title, category, points, authorid, authorName } = chall
-		var d = await Chall.findOne({ challid })
-		var { solves, votes } = d
-		var authorUser = await global.djsclient.fetchUser(authorid)
+        let { challid, title, category, points, authorid, authorName } = chall
+        var d = await Chall.findOne({ challid })
+        var { solves, votes } = d
+        var authorUser = await global.djsclient.fetchUser(authorid)
         var { username, discriminator, displayAvatarURL: icon_url } = authorUser
         var author = `${username}#${discriminator} (${authorName})`
 
-		var descEmbed = genChallEmbed({
-			challid, title, category, points, author, solves, themecolour, description, icon_url, votes
-		})
+        var descEmbed = genChallEmbed({
+            challid, title, category, points, author, solves, themecolour, description, icon_url, votes
+        })
 
-		msg.channel.send({ embed: descEmbed })
-	},
-	notes: []
+        msg.channel.send({ embed: descEmbed })
+    },
+    notes: []
 }
 
 module.exports = chall
