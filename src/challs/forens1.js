@@ -17,13 +17,8 @@ var chall = {
 		`
 
 		let { challid, title, category, points, authorid, authorName } = chall
-		var d = await Chall.findOne({ challid })
-		var { solves, votes } = d
-		var authorUser = await global.djsclient.fetchUser(authorid)
-		var { username, discriminator, displayAvatarURL: icon_url } = authorUser
-		var author = `${username}#${discriminator} (${authorName})`
 
-		var descEmbed = genChallEmbed({
+		var descEmbed = await genChallEmbed({
 			challid, title, category, points, authorid, authorName, themecolour, description
 		})
 
