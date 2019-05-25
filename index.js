@@ -19,7 +19,7 @@ require(path.join(__dirname, './src/challs/index'))
 const dbURI = process.env.DB_URI || 'mongodb://localhost:27017/dctf-bot'
 mongoose.connect(dbURI, { useNewUrlParser: true })
 	.then(() => {
-		console.log(`Connected to DB at ${dbURI}`)
+		console.log(`Connected to DB`)
 		client.login(process.env.TOKEN)
 	})
 

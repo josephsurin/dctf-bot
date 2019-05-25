@@ -6,7 +6,7 @@ const { Chall } = require('../../models/index')
 const dbURI = process.env.DB_URI || 'mongodb://localhost:27017/dctf-bot'
 mongoose.connect(dbURI, { useNewUrlParser: true })
 	.then(() => {
-		console.log(`Connected to DB at ${dbURI} for maintenance`)
+		console.log(`Connected to DB for maintenance`)
 		
 		var files = fs.readdirSync(path.join(__dirname, '../challs')).filter(x => x != 'index.js')
 
