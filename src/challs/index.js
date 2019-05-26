@@ -8,6 +8,9 @@ var challs = function loadChalls() {
 	files.forEach(file => {
 		var challData = require(path.join(__dirname, file))
 		challsObj[challData.challid] = challData
+		if(challData['init']) {
+			challData['init']()
+		}
 	})
 	return challsObj
 }()
