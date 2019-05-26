@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "maint": "node ./src/util/maint.js"
+    "maint": "node ./src/util/maint.js",
+    "heroku-postbuild": "node ./src/util/maint.js"
   },
   "author": "",
   "license": "ISC",

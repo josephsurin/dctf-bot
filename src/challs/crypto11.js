@@ -80,6 +80,7 @@ function crypto11DecryptListener(msg) {
             color: themecolour
         }
         msg.channel.send({ embed })
+        console.log('COMMAND LOG:', msg.author.username + '#' + msg.author.discriminator, msg.content)
     } catch(e) {
         console.log(e)
         msg.channel.send('Ensure your decryption request is in the form \`crypto11.decrypt <ciphertext>\` where \`<ciphertext>\` is a positive integer less than 1500 digits long.')
