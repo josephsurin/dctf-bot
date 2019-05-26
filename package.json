@@ -1,7 +1,7 @@
 {
   "name": "dctf-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Discord CTF Bot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
