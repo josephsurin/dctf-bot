@@ -4,9 +4,9 @@
   "description": "Discord CTF Bot",
   "main": "index.js",
   "scripts": {
+    "build": "node ./src/util/maint.js",
     "start": "node index.js",
-    "maint": "node ./src/util/maint.js",
-    "heroku-postbuild": "node ./src/util/maint.js"
+    "maint": "node ./src/util/maint.js"
   },
   "author": "",
   "license": "ISC",
