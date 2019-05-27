@@ -10,6 +10,10 @@ const MAX_SEARCH_LEN = 30
 // set up yargs
 const yargs = require('yargs')
 yargs
+	.option('plain', {
+		alias: 'p',
+		describe: 'Shows challenges without additional emoji'
+	})
 	.option('hideSolved', {
 		alias: 'H',
 		describe: 'Hides challenges you have solved'
@@ -57,7 +61,7 @@ module.exports = async function challs(msg, args) {
 
 	if(!argv) return false
 
-	var { hideSolved, search, sort } = argv
+	var { plain, hideSolved, search, sort } = argv
 
 	Chall.find().sort('challid').then(async (dbChalls) => {
 		
@@ -68,7 +72,7 @@ module.exports = async function challs(msg, args) {
 
 		var { solves } = await Player.findOne({ playerid: msg.author.id }) || undefined
 	
-		var fields = processChallsDisplay(dbChalls, hideSolved, search, sort, solves)
+		var fields = processChallsDisplay(dbChalls, plain, hideSolved, search, sort, solves)
 	
 		var embed = {
 			title: 'Challenges List',
@@ -78,7 +82,7 @@ module.exports = async function challs(msg, args) {
 			timestamp: `${new Date().toISOString()}`,
 			footer: {
                 icon_url: msg.author.displayAvatarURL,
-                text: `${msg.author.username} ${search ? '| search: ' + search : ''} ${hideSolved ? '| Hiding solved challs' : ''}` 
+                text: `${msg.author.username} ${search ? '| search: ' + search : ''} ${hideSolved ? '| Hiding solved challs' : ''} ${plain ? '| plain' : ''}` 
             },
 			color: themecolour
 		}
@@ -90,7 +94,7 @@ module.exports = async function challs(msg, args) {
 
 const Fuse = require('fuse.js')
 
-function processChallsDisplay(dbChalls, hideSolved, search, sort, playerSolves) {
+function processChallsDisplay(dbChalls, plain, hideSolved, search, sort, playerSolves) {
 
 	//SEARCING
 	var filteredChalls = dbChalls.map(({ challid, solves }) => Object.assign({ solves }, allChalls[challid]))
@@ -161,7 +165,7 @@ function processChallsDisplay(dbChalls, hideSolved, search, sort, playerSolves) 
 	function processChallDisplay(chall) {
 		let { challid, title, points, solves } = chall
 		var display = `**${challid}**: ${title} [${points}] - ${solves.length} solves`
-		if(playerSolves && hasSolvedSync(playerSolves, challid)) {
+		if(!plain && playerSolves && hasSolvedSync(playerSolves, challid)) {
 			display += ':white_check_mark:'
 		}
 		return display
