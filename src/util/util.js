@@ -82,7 +82,13 @@ function avgVote(votes) {
 }
 
 async function hasSolved(playerid, challid) {
+	// searches up for player document with playerid
 	const { solves } = await Player.findOne({ playerid })
+	return hasSolvedSync(solves, challid)
+}
+
+function hasSolvedSync(solves, challid) {
+	// uses already found solves array
 	var solveIndex = solves.findIndex(s => s.challid == challid)
 	if(solveIndex == -1) {
 		return false
@@ -100,5 +106,6 @@ module.exports = {
 	getRank,
 	getLeaderboard,
 	emojiRank,
-	hasSolved
+	hasSolved,
+	hasSolvedSync
 }

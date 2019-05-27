@@ -2,6 +2,9 @@ const path = require('path')
 const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/util'))
 const { themecolour } = getBotConfig()
 
+const description = `
+What do you think of my [painting](https://drive.google.com/open?id=1MkfM3miAaUfSxFeKjoQwQR_Y3DOOcenv)?`
+
 var chall = {
     challid: 'stego1',
     title: 'Darkness',
@@ -10,13 +13,10 @@ var chall = {
     authorid: '111028987836313600',
     authorName: 'Joseph',
     flag: 'e01c55e0401ab7eba9911f687b2935107ff1d524fa2da420fc96501fc402362c',
+    description,
     desc: async function(msg) {
-        var description = `
 
-            What do you think of my [painting](https://drive.google.com/open?id=1MkfM3miAaUfSxFeKjoQwQR_Y3DOOcenv)?
-        `
-
-        let { challid, title, category, points, authorid, authorName } = chall
+        let { challid, title, category, points, authorid, authorName, description } = chall
 
         var descEmbed = await genChallEmbed({
             challid, title, category, points, authorid, authorName, themecolour, description

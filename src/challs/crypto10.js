@@ -2,20 +2,10 @@ const path = require('path')
 const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/util'))
 const { themecolour } = getBotConfig()
 
-var chall = {
-    challid: 'crypto10',
-    title: 'RSA Level 6',
-    category: 'Cryptography',
-    points: 20,
-    authorid: '111028987836313600',
-    authorName: 'Joseph',
-    flag: '794d71de1d47901e6d7f886947363f814e8893eb2be978454d15de1d3f5eb33f',
-    desc: async function(msg) {
-        var description = `
+const description = `
+Is there anything that seems out of the ordinary? :eyes:
 
-            Is there anything that seems out of the ordinary? :eyes:
-
-            The values are [here](https://paste.ee/r/2eGJI/0)
+The values are [here](https://paste.ee/r/2eGJI/0)
 
             \`\`\`python
 from Crypto.Util.number import getPrime, bytes_to_long
@@ -33,10 +23,20 @@ n2 = p2 * q2
 m = bytes_to_long(flag)
 
 c1 = pow(m, e, n1)
-c2 = pow(m, e, n2)\`\`\`
-        `
+c2 = pow(m, e, n2)\`\`\``
 
-        let { challid, title, category, points, authorid, authorName } = chall
+var chall = {
+    challid: 'crypto10',
+    title: 'RSA Level 6',
+    category: 'Cryptography',
+    points: 20,
+    authorid: '111028987836313600',
+    authorName: 'Joseph',
+    flag: '794d71de1d47901e6d7f886947363f814e8893eb2be978454d15de1d3f5eb33f',
+    description,
+    desc: async function(msg) {
+
+        let { challid, title, category, points, authorid, authorName, description } = chall
 
         var descEmbed = await genChallEmbed({
             challid, title, category, points, authorid, authorName, themecolour, description

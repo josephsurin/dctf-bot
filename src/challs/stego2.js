@@ -2,6 +2,9 @@ const path = require('path')
 const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/util'))
 const { themecolour } = getBotConfig()
 
+const description = `
+I think [this dog](https://drive.google.com/open?id=1MMo64yB4yAUBEKGkAnzfMp4PTm8EE04q) is trying to tell me something of little significance, but I can't understand him one bit! Can you help me?`
+
 var chall = {
     challid: 'stego2',
     title: 'Dog',
@@ -10,13 +13,10 @@ var chall = {
     authorid: '111028987836313600',
     authorName: 'Joseph',
     flag: '2d404449ec687f43b4aee755ddc01a30a665972662bb6dd355e0277cbff004cd',
+    description,
     desc: async function(msg) {
-        var description = `
 
-            I think [this dog](https://drive.google.com/open?id=1MMo64yB4yAUBEKGkAnzfMp4PTm8EE04q) is trying to tell me something of little significance, but I can't understand him one bit! Can you help me?
-        `
-
-        let { challid, title, category, points, authorid, authorName } = chall
+        let { challid, title, category, points, authorid, authorName, description } = chall
 
         var descEmbed = await genChallEmbed({
             challid, title, category, points, authorid, authorName, themecolour, description

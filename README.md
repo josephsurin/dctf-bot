@@ -33,10 +33,9 @@ var chall = {
     authorid: '<discord id goes here>',
     authorName: '<author display name goes here>',
     flag: '<sha256 hash of flag goes here>',
-    desc: async function(msg) {
-        var description = `<description message goes here (supports basic markdown)>`
+    description: `<description message goes here (supports basic markdown)>`
 
-        let { challid, title, category, points, authorid, authorName } = chall
+        let { challid, title, category, points, authorid, authorName, description } = chall
 
         var descEmbed = await genChallEmbed({
             challid, title, category, points, authorid, authorName, themecolour, description
@@ -50,5 +49,6 @@ var chall = {
 module.exports = chall
 ```
 
-3. If your challenge doesn't require any further interactivity, you should only need to edit the `challid`, `title`, `category`, `points`, `authorid`, `authorName`, `flag` fields and the `description` message, you can also optionally add some `notes`.
+3. If your challenge doesn't require any further interactivity, you should only need to edit the `challid`, `title`, `category`, `points`, `authorid`, `authorName`, `flag` fields and the `description` message, you can also optionally add some `notes`,
+    desc: async function(msg) {.
 4. Create a pull request.
