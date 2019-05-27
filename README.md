@@ -25,6 +25,8 @@ const path = require('path')
 const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/util'))
 const { themecolour } = getBotConfig()
 
+const description = `<description message goes here (supports basic markdown)>`
+
 var chall = {
     challid: '<challid goes here>',
     title: '<chall title goes here>',
@@ -33,7 +35,8 @@ var chall = {
     authorid: '<discord id goes here>',
     authorName: '<author display name goes here>',
     flag: '<sha256 hash of flag goes here>',
-    description: `<description message goes here (supports basic markdown)>`
+    description,
+    desc: async function(msg) {
 
         let { challid, title, category, points, authorid, authorName, description } = chall
 
