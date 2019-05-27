@@ -96,9 +96,9 @@ function processChallsDisplay(dbChalls, hideSolved, search, sort, playerSolves) 
 	var filteredChalls = dbChalls.map(({ challid, solves }) => Object.assign({ solves }, allChalls[challid]))
 	if(search) {
 		const fuse = new Fuse(filteredChalls, {
-			threshold: 0.5,
+			threshold: 0.2,
 			distance: 10000,
-			minMatchCharLength: 4,
+			minMatchCharLength: 3,
 			maxPatternLength: MAX_SEARCH_LEN,
 			keys: ['challid', 'title', 'category', 'authorid', 'authorName', 'description']
 		})
