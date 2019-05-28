@@ -53,5 +53,4 @@ module.exports = chall
 ```
 
 3. If your challenge doesn't require any further interactivity, you should only need to edit the `challid`, `title`, `category`, `points`, `authorid`, `authorName`, `flag` fields and the `description` message, you can also optionally add some `notes`,
-    desc: async function(msg) {.
 4. Create a pull request.
