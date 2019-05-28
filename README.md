@@ -30,7 +30,7 @@ const description = `<description message goes here (supports basic markdown)>`
 var chall = {
     challid: '<challid goes here>',
     title: '<chall title goes here>',
-    category: '<chall category goes here',
+    category: '<chall category goes here>',
     points: 0,
     authorid: '<discord id goes here>',
     authorName: '<author display name goes here>',
