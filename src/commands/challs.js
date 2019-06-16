@@ -70,7 +70,8 @@ module.exports = async function challs(msg, args) {
 			return false
 		}
 
-		var { solves } = await Player.findOne({ playerid: msg.author.id }) || undefined
+		var p = await Player.findOne({ playerid: msg.author.id })
+		var solves = p ? p.solves : undefined
 	
 		var fields = processChallsDisplay(dbChalls, plain, hideSolved, search, sort, solves)
 	
