@@ -2,7 +2,7 @@ const path = require('path')
 const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/util'))
 const { themecolour } = getBotConfig()
 
-const description = What's up with this vinegar riot? Someone from "Vinegar is gross" sent me this message. What in the world does it say? \`jttyarqnejqvsjohxmopnrtiettukpiycr\`
+const description = `What's up with this vinegar riot? Someone from "Vinegar is gross" sent me this message. What in the world does it say? \`jttyarqnejqvsjohxmopnrtiettukpiycr\``
 var chall = {
     challid: 'crypto13',
     title: 'Vigilance',
