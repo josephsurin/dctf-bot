@@ -9,7 +9,6 @@ I've managed to intercept some of the values they were using. You can find them 
 
 \`\`\`python
 from Crypto.Cipher import AES
-from Crypto import Random
 from Crypto.Random.random import randint
 from Crypto.Util.number import bytes_to_long, long_to_bytes
 from hidden import flag
