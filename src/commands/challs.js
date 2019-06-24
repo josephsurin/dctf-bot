@@ -20,6 +20,7 @@ yargs
 	})
 	.option('search', {
 		alias: 'S',
+        type: 'string',
 		describe: `Search all challenges for a keyword (please limit your search query to less than ${MAX_SEARCH_LEN} characters)`
 	})
 	.option('sort', {
