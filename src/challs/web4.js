@@ -11,7 +11,7 @@ var chall = {
     challid: 'web4',
     title: 'Yet Another Pasting Site',
     category: 'Web',
-    points: 55,
+    points: 70,
     authorid: '111028987836313600',
     authorName: 'Joseph',
     flag: 'ce6946516abf53818adf6c0ad582a65005ca5bd8fd2b31a04388a5df9a215694',
