@@ -14,7 +14,7 @@ var chall = {
     challid: 'crypto8',
     title: 'Linear Cipher',
     category: 'Cryptography',
-    points: 40,
+    points: 45,
     authorid: '111028987836313600',
     authorName: 'Joseph',
     flag: '352e70933cf868fe2c4f32bc5a6c1fc3397e92243c6178cb7d78e159061c4ead',

@@ -31,7 +31,7 @@ var chall = {
     challid: 'crypto12',
     title: 'An Easy Problem!',
     category: 'Cryptography',
-    points: 30,
+    points: 35,
     authorid: '111028987836313600',
     authorName: 'Joseph',
     flag: '4bbed8820b3d7d999e554e95811e2100a56cd3b41bb9c82d171f6e1fc9d5d3b2',
