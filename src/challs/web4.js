@@ -1,11 +1,13 @@
 const path = require('path')
 const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/util'))
-const { themecolour } = getBotConfig()
+const { cmdprefix, themecolour } = getBotConfig()
 
 const description = `
 The best pasting site on the planet is making a name for itself with its totally not generic Bootstrap frontend and very secure and robust Node backend! Did I mention the very attentive and loyal support team they have...? 
 
-https://miscctf-web.herokuapp.com/web4/`
+https://miscctf-web.herokuapp.com/web4/
+
+See \`${cmdprefix}notes web4\` for a hint`
 
 var chall = {
     challid: 'web4',
@@ -26,7 +28,7 @@ var chall = {
 
         msg.channel.send({ embed: descEmbed })
     },
-    notes: []
+    notes: ['Given how dodgy the website looks, I bet the developers follow bad practices... Can you see if they\'ve left anything in their path that shouldn\'t have made it to production?']
 }
 
 module.exports = chall
