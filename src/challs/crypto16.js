@@ -3,33 +3,24 @@ const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/ut
 const { themecolour } = getBotConfig()
 
 const description = `
-RSA... RSA...
+I found this base64 string accompanied by some pieces of paper... Can you make sense of this weird diagram?!
 
-Output of the below script is [here](https://paste.ee/r/HowMY/0).
+\`\`\`
+a1x4ohs/GgOTdiFBBpAiT3Y3/kV8NljwBBAFB5M1Pw4Dj19gbTfhAEwBpfFGAl6Wh3VbaZWYdWwBpuEqawHv4T5Yc5a+XChI+/IFbBfIijJne9WKah4korleEGiPt0V1G/zeK3wr4vIGEkSWrXQSUb33NHc14sQGeGC8kVVPVInyYB0GjLtRLjC+xlA=
+\`\`\`
 
-\`\`\`python
-from Crypto.Util.number import getPrime, bytes_to_long
-
-N = getPrime(1024)*getPrime(1024) 
-e = 17
-
-M1 = bytes_to_long(b'MISCCTF{first part of the flag goes here')
-M2 = bytes_to_long(b'second part is here!}')
-b = M1 - M2 + getPrime(208)*N
-
-C1 = pow(M1, e, N)
-C2 = pow(M2, e,  N)
-print(f'e={e}\\nN={N}\\nb={b}\\nC1={C1}\\nC2={C2}')
-\`\`\``
+[cipher.jpg](https://drive.google.com/open?id=13w2AHsAWx7cANOF3CBQJ_aFdiy_NHDkF)
+[tear.jpg](https://drive.google.com/open?id=1-Kr__ok_e1F0BlStJ8xGdKxToB9rJop0)
+`
 
 var chall = {
-    challid: 'crypto14',
-    title: 'RSA Level 8',
+    challid: 'crypto16',
+    title: 'Sketch',
     category: 'Cryptography',
-    points: 40,
+    points: 70,
     authorid: '111028987836313600',
     authorName: 'Joseph',
-    flag: 'da5f28de59da2196fe934536030365d352c4efb3b5f75c6868e70169016c5bbd',
+    flag: 'be3c30002ec299ab958b35bf574a3e12bd8602740e3815c9e242074744727760',
     description,
     desc: async function(msg) {
         
