@@ -11,7 +11,7 @@ const MAX_SEARCH_LEN = 30
 const yargs = require('yargs')
 yargs
 	.option('plain', {
-		alias: 'p',
+		alias: 'P',
 		describe: 'Shows challenges without additional emoji'
 	})
 	.option('hideSolved', {
@@ -28,6 +28,10 @@ yargs
 		describe: 'Sort the challenges list',
 		choices: ['solves', 'points']
 	})
+    .option('points', {
+        alias: 'p',
+        describe: 'Filter challenges based on how many points they are worth'
+    })
 	.alias('h', 'help')
 	.hide('version')
 	.check(argv => {
@@ -62,7 +66,8 @@ module.exports = async function challs(msg, args) {
 
 	if(!argv) return false
 
-	var { plain, hideSolved, search, sort } = argv
+	var { plain, hideSolved, search, sort, points } = argv
+    var filters = { plain, hideSolved, search, sort, points }
 
 	Chall.find().sort('challid').then(async (dbChalls) => {
 		
@@ -74,7 +79,7 @@ module.exports = async function challs(msg, args) {
 		var p = await Player.findOne({ playerid: msg.author.id })
 		var solves = p ? p.solves : undefined
 	
-		var fields = processChallsDisplay(dbChalls, plain, hideSolved, search, sort, solves)
+		var fields = processChallsDisplay(dbChalls, filters, solves)
 	
 		var embed = {
 			title: 'Challenges List',
@@ -94,9 +99,40 @@ module.exports = async function challs(msg, args) {
 	})		
 }
 
+function parsePointsFilter(expr) {
+    const lte = (a, b) => a <= b
+    const lt = (a, b) => a < b
+    const eq = (a, b) => a == b
+    const gt = (a, b) => a > b
+    const gte = (a, b) => a >= b
+    expr = expr.replace(/\s/g, '')
+    var out = []
+    if(expr[1] == '=') {
+        if(expr[0] == '<') out.push(lte)
+        else if(expr[0] == '>') out.push(gt)
+        else if(expr[0] == '=') out.push(eq)
+        else return false
+
+        var val = parseInt(expr.slice(2))
+        if(isNaN(val)) return false
+        else out.push(val)
+    } else {
+        if(expr[0] == '<') out.push(lt)
+        else if(expr[0] == '>') out.push(gt)
+        else if(expr[0] == '=') out.push(eq)
+        else return false
+
+        var val = parseInt(expr.slice(1))
+        if(isNaN(val)) return false
+        else out.push(val)
+    }
+
+    return out
+}
+
 const Fuse = require('fuse.js')
 
-function processChallsDisplay(dbChalls, plain, hideSolved, search, sort, playerSolves) {
+function processChallsDisplay(dbChalls, { plain, hideSolved, search, sort, points }, playerSolves) {
 
 	//SEARCING
 	var filteredChalls = dbChalls.map(({ challid, solves }) => Object.assign({ solves }, allChalls[challid]))
@@ -122,6 +158,20 @@ function processChallsDisplay(dbChalls, plain, hideSolved, search, sort, playerS
 	if(hideSolved && playerSolves) {
 		filteredChalls = filteredChalls.filter(({ challid }) => !hasSolvedSync(playerSolves, challid))
 	}
+
+    //POINTS FILTERING
+    if(points) {
+        var parsed = parsePointsFilter(points)
+        if(parsed) {
+            var [op, val] = parsed
+            filteredChalls = filteredChalls.filter(({ challid }) => op(allChalls[challid].points, val))
+        } else {
+            return [{
+                name: ':slight_frown: :slight_frown: :slight_frown:',
+                value: 'Something went wrong with your search!'
+            }]
+        }
+    }
 
 	//SORTING
 	var collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' }) //natural sort
