@@ -100,34 +100,40 @@ module.exports = async function challs(msg, args) {
 }
 
 function parsePointsFilter(expr) {
-    const lte = (a, b) => a <= b
-    const lt = (a, b) => a < b
-    const eq = (a, b) => a == b
-    const gt = (a, b) => a > b
-    const gte = (a, b) => a >= b
-    expr = expr.replace(/\s/g, '')
-    var out = []
-    if(expr[1] == '=') {
-        if(expr[0] == '<') out.push(lte)
-        else if(expr[0] == '>') out.push(gt)
-        else if(expr[0] == '=') out.push(eq)
-        else return false
-
-        var val = parseInt(expr.slice(2))
-        if(isNaN(val)) return false
-        else out.push(val)
-    } else {
-        if(expr[0] == '<') out.push(lt)
-        else if(expr[0] == '>') out.push(gt)
-        else if(expr[0] == '=') out.push(eq)
-        else return false
-
-        var val = parseInt(expr.slice(1))
-        if(isNaN(val)) return false
-        else out.push(val)
+    const eq = (b, a) => a == b
+    if(typeof expr == 'number') return eq.bind(this, expr)
+    if(expr.includes('..')) {
+        var vals = expr.split('..')
+        if(vals.length == 2) {
+            var [a, b] = vals.map(a => parseInt(a))
+            if(typeof a == 'number' && typeof b == 'number') {
+                const rng = (a, c, b) => (a <= b && b <= c)
+                return rng.bind(this, a, b)
+            } else return false
+        } else return false
     }
+    const lte = (b, a) => a <= b
+    const lt = (b, a) => a < b
+    const gt = (b, a) => a > b
+    const gte = (b, a) => a >= b
+    expr = expr.replace(/\s/g, '')
+    if(expr[1] == '=') {
+        var val = parseInt(expr.slice(2))
+        if(typeof val != 'number') return false
 
-    return out
+        if(expr[0] == '<') return lte.bind(this, val)
+        else if(expr[0] == '>') return gte.bind(this, val)
+        else if(expr[0] == '=') return eq.bind(this, val)
+        else return false
+    } else {
+        var val = parseInt(expr.slice(1))
+        if(typeof val != 'number') return false
+
+        if(expr[0] == '<') return lt.bind(this, val)
+        else if(expr[0] == '>') return gt.bind(this, val)
+        else if(expr[0] == '=') return eq.bind(this, val)
+        else return false
+    }
 }
 
 const Fuse = require('fuse.js')
@@ -161,10 +167,9 @@ function processChallsDisplay(dbChalls, { plain, hideSolved, search, sort, point
 
     //POINTS FILTERING
     if(points) {
-        var parsed = parsePointsFilter(points)
-        if(parsed) {
-            var [op, val] = parsed
-            filteredChalls = filteredChalls.filter(({ challid }) => op(allChalls[challid].points, val))
+        var op = parsePointsFilter(points)
+        if(op) {
+            filteredChalls = filteredChalls.filter(({ challid }) => op(allChalls[challid].points))
         } else {
             return [{
                 name: ':slight_frown: :slight_frown: :slight_frown:',
