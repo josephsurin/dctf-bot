@@ -1,5 +1,6 @@
 {
 	"author": "joseph#8210",
+    "admins": ["111028987836313600"],
 	"botname": "DCTF-Bot",
 	"cmdprefix": "$",
 	"flagformat": "MISCCTF{a-zA-Z0-9!?_-}",
