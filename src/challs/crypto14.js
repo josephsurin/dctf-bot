@@ -3,36 +3,36 @@ const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/ut
 const { themecolour } = getBotConfig()
 
 const description = `
-I've learnt my lesson about small public exponents...
+RSA... RSA...
 
-The values are [here](https://paste.ee/r/bIdhw/0).
+Output of the below script is [here](https://paste.ee/r/HowMY/0).
 
 \`\`\`python
 from Crypto.Util.number import getPrime, bytes_to_long
-flag = b'MISCCTF{i dont think this is the flag}'
-assert(len(flag) < 50)
 
-p, q = getPrime(1024), getPrime(1024)
-n = p * q
-e = 3
+N = getPrime(1024)*getPrime(1024) 
+e = 17
 
-padded = flag.ljust(256, b'\\x00')
-m = bytes_to_long(padded)
+M1 = bytes_to_long(b'MISCCTF{first part of the flag goes here')
+M2 = bytes_to_long(b'second part is here!}')
+b = M1 - M2 + getPrime(208)*N
 
-c = pow(m, e, n)
+C1 = pow(M1, e, N)
+C2 = pow(M2, e,  N)
+print(f'e={e}\\nN={N}\\nb={b}\\nC1={C1}\\nC2={C2}')
 \`\`\``
 
 var chall = {
-    challid: 'crypto7',
-    title: 'RSA Level 4',
+    challid: 'crypto14',
+    title: 'RSA Level 8',
     category: 'Cryptography',
-    points: 30,
+    points: 40,
     authorid: '111028987836313600',
     authorName: 'Joseph',
-    flag: '6e42cd94487796b7332a38aa5f78d6bc376a971adb60806172a745a58941c0eb',
+    flag: 'da5f28de59da2196fe934536030365d352c4efb3b5f75c6868e70169016c5bbd',
     description,
     desc: async function(msg) {
-
+        
         let { challid, title, category, points, authorid, authorName, description } = chall
 
         var descEmbed = await genChallEmbed({
