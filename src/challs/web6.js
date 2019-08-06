@@ -3,20 +3,18 @@ const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/ut
 const { cmdprefix, themecolour } = getBotConfig()
 
 const description = `
-The best pasting site on the planet is making a name for itself with its totally not generic Bootstrap frontend and very secure and robust Node backend! Did I mention the very attentive and loyal support team they have...? 
+:hushed: :drooling_face: :sunglasses: :see_no_evil: :computer: :keyboard: :syringe: :smirk_cat: :japanese_goblin:
 
-https://miscctf-web.herokuapp.com/web4/
-
-See \`${cmdprefix}notes web4\` for a hint`
+https://emoji-combiner-ctf.herokuapp.com/`
 
 var chall = {
-    challid: 'web4',
-    title: 'Yet Another Pasting Site',
+    challid: 'web6',
+    title: 'Emoji Combiner',
     category: 'Web',
-    points: 70,
+    points: 50,
     authorid: '111028987836313600',
     authorName: 'Joseph',
-    flag: 'ce6946516abf53818adf6c0ad582a65005ca5bd8fd2b31a04388a5df9a215694',
+    flag: 'a70377a70c470a6bec29e940eeec7ff53537c42b43b4fbfe47e64d6a339e31b4',
     description,
     desc: async function(msg) {
 
@@ -28,7 +26,7 @@ var chall = {
 
         msg.channel.send({ embed: descEmbed })
     },
-    notes: ['Given how dodgy the website looks, I bet the developers follow bad practices... Can you see if they\'ve left anything in their path that shouldn\'t have made it to production?']
+    notes: []
 }
 
 module.exports = chall

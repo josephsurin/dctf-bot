@@ -3,36 +3,23 @@ const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/ut
 const { themecolour } = getBotConfig()
 
 const description = `
-I've learnt my lesson about small public exponents...
+I used a one time pad twice to encrypt my two messages... I'm sure it'll be fine!
 
-The values are [here](https://paste.ee/r/bIdhw/0).
-
-\`\`\`python
-from Crypto.Util.number import getPrime, bytes_to_long
-flag = b'MISCCTF{i dont think this is the flag}'
-assert(len(flag) < 50)
-
-p, q = getPrime(1024), getPrime(1024)
-n = p * q
-e = 3
-
-padded = flag.ljust(256, b'\\x00')
-m = bytes_to_long(padded)
-
-c = pow(m, e, n)
-\`\`\``
+[part1_enc.png](https://drive.google.com/open?id=1GZg66LXX-njHLk0H2Hz-NUAIJf1JebXi)
+[part2_enc.png](https://drive.google.com/open?id=1dkN15mHI4M4J7tNV-Z9WYQmr4HU6b4Ne)
+`
 
 var chall = {
-    challid: 'crypto7',
-    title: 'RSA Level 4',
+    challid: 'crypto17',
+    title: 'Two Time Pad',
     category: 'Cryptography',
-    points: 30,
+    points: 35,
     authorid: '111028987836313600',
     authorName: 'Joseph',
-    flag: '6e42cd94487796b7332a38aa5f78d6bc376a971adb60806172a745a58941c0eb',
+    flag: 'be3c30002ec299ab958b35bf574a3e12bd8602740e3815c9e242074744727760',
     description,
     desc: async function(msg) {
-
+        
         let { challid, title, category, points, authorid, authorName, description } = chall
 
         var descEmbed = await genChallEmbed({

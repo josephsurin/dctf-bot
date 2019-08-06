@@ -3,36 +3,27 @@ const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/ut
 const { themecolour } = getBotConfig()
 
 const description = `
-I've learnt my lesson about small public exponents...
+I found this base64 string accompanied by some pieces of paper... Can you make sense of this weird diagram?!
 
-The values are [here](https://paste.ee/r/bIdhw/0).
+\`\`\`
+a1x4ohs/GgOTdiFBBpAiT3Y3/kV8NljwBBAFB5M1Pw4Dj19gbTfhAEwBpfFGAl6Wh3VbaZWYdWwBpuEqawHv4T5Yc5a+XChI+/IFbBfIijJne9WKah4korleEGiPt0V1G/zeK3wr4vIGEkSWrXQSUb33NHc14sQGeGC8kVVPVInyYB0GjLtRLjC+xlA=
+\`\`\`
 
-\`\`\`python
-from Crypto.Util.number import getPrime, bytes_to_long
-flag = b'MISCCTF{i dont think this is the flag}'
-assert(len(flag) < 50)
-
-p, q = getPrime(1024), getPrime(1024)
-n = p * q
-e = 3
-
-padded = flag.ljust(256, b'\\x00')
-m = bytes_to_long(padded)
-
-c = pow(m, e, n)
-\`\`\``
+[cipher.jpg](https://drive.google.com/open?id=13w2AHsAWx7cANOF3CBQJ_aFdiy_NHDkF)
+[tear.jpg](https://drive.google.com/open?id=1-Kr__ok_e1F0BlStJ8xGdKxToB9rJop0)
+`
 
 var chall = {
-    challid: 'crypto7',
-    title: 'RSA Level 4',
+    challid: 'crypto16',
+    title: 'Sketch',
     category: 'Cryptography',
-    points: 30,
+    points: 70,
     authorid: '111028987836313600',
     authorName: 'Joseph',
-    flag: '6e42cd94487796b7332a38aa5f78d6bc376a971adb60806172a745a58941c0eb',
+    flag: 'be3c30002ec299ab958b35bf574a3e12bd8602740e3815c9e242074744727760',
     description,
     desc: async function(msg) {
-
+        
         let { challid, title, category, points, authorid, authorName, description } = chall
 
         var descEmbed = await genChallEmbed({
