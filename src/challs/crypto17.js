@@ -16,7 +16,7 @@ var chall = {
     points: 35,
     authorid: '111028987836313600',
     authorName: 'Joseph',
-    flag: 'be3c30002ec299ab958b35bf574a3e12bd8602740e3815c9e242074744727760',
+    flag: '87877da78bf52b804ba45014717ac14ff6ca2b70121e6ed918b66e01a1921327',
     description,
     desc: async function(msg) {
         
