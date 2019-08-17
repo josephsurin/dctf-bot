@@ -24,7 +24,7 @@ var chall = {
 
         msg.channel.send({ embed: descEmbed })
     },
-    notes: []
+    notes: ["I don't have a huge crush on Chuck Norris at all. But there is a reason why he's plastered all over this challenge. Google is your friend."]
 }
 
 module.exports = chall
