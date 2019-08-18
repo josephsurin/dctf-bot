@@ -14,9 +14,9 @@ __.____________.__.__________.___________._____________.__._____________.__.____
 `
 
 var chall = {
-    challid: 'misc1',
+    challid: 'crypto18',
     title: 'Dashes-and-dots.',
-    category: 'Misc',
+    category: 'Cryptography',
     points: 65,
     authorid: '111028987836313600',
     authorName: 'Joseph',
