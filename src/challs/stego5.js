@@ -23,7 +23,7 @@ var chall = {
 
         msg.channel.send({ embed: descEmbed })
     },
-    notes: ['https://en.wikipedia.org/wiki/Steganography#Digital_text']
+    notes: ['https://en.wikipedia.org/wiki/Steganography#Digital_text', 'One dimensional binary?']
 }
 
 module.exports = chall
