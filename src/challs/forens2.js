@@ -25,7 +25,7 @@ var chall = {
 
         msg.channel.send({ embed: descEmbed })
     },
-    notes: []
+    notes: ["The image is incidental, make sure you consider all other channels."]
 }
 
 module.exports = chall
