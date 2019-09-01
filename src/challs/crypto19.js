@@ -33,9 +33,19 @@ S = r*Q
 e = flag_point + S
 
 print 'p={}\\na={}\\nb={}\\nQ={}\\nrG={}\\ne={}'.format(p,a,b,Q,rG,e)
-# print '\\nk={}\nx={}\\nr={}'.format(k,x,r) you wish...
+# print 'k={}\\nx={}\\nr={}'.format(k,x,r) you wish...
 \`\`\`
-`
+
+Output:
+
+\`\`\`python
+p=16467119735301371251
+a=15992
+b=1935
+Q=(7752054596203271296 : 14564882369394231060 : 1)
+rG=(11112200267234172881 : 9154659646993816755 : 1)
+e=(10546149195771984376 : 5969827044748991609 : 1)
+\`\`\`
 
 var chall = {
     challid: 'crypto19',
