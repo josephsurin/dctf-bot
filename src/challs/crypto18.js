@@ -32,7 +32,7 @@ var chall = {
 
         msg.channel.send({ embed: descEmbed })
     },
-    notes: []
+    notes: ['All of the data is contained in the underscores; the dots are just separators']
 }
 
 module.exports = chall
