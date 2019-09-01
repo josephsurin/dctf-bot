@@ -32,8 +32,8 @@ rG = r*G
 S = r*Q
 e = flag_point + S
 
-print 'p={}\na={}\nb={}\nQ={}\nrG={}\ne={}'.format(p,a,b,Q,rG,e)
-# print '\n\nk={}\nx={}\nr={}'.format(k,x,r) you wish...
+print 'p={}\\na={}\\nb={}\\nQ={}\\nrG={}\\ne={}'.format(p,a,b,Q,rG,e)
+# print '\\nk={}\nx={}\\nr={}'.format(k,x,r) you wish...
 \`\`\`
 `
 
