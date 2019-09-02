@@ -5,6 +5,8 @@ const { themecolour } = getBotConfig()
 const description = `
     You are a secret agent tasked with investigating the famous dissident Merlin.
     Can you find out what he's been up to?
+
+    [Merlin](https://drive.google.com/open?id=1fkfLvsWzMizumB08gliK9aEDM4Yjf9bk)
     `
 
 var chall = {
