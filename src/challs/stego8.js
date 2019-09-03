@@ -2,11 +2,11 @@ const path = require('path')
 const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/util'))
 const { themecolour } = getBotConfig()
 
-const description = `I got [this weird audio] from a dude who calls himself 'the friendly local alien'. I don't know about you, but something in this feels missing...`
+const description = `Hey, I didn't see the stego workshop, but I've heard it's straight forward [to solve this]() if you did see it. I've just been enjoying the music, but something about the songs seem missing...`
 
 var chall = {
     challid: 'stego7',
-    title: 'An Alien Message',
+    title: 'Audio Stego Adventure!!!',
     category: 'Steganography',
     points: 25,
     authorid: '275149655166287872',
@@ -23,7 +23,7 @@ var chall = {
 
         msg.channel.send({ embed: descEmbed })
     },
-    notes: ["Check out the steganography workshop ;)"]
+    notes: ['Songs used in this chall:','Check out the steganography workshop ;) (slides/pdf on github)']
 }
 
 module.exports = chall
