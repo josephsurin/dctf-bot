@@ -2,10 +2,10 @@ const path = require('path')
 const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/util'))
 const { themecolour } = getBotConfig()
 
-const description = `Hey, I didn't see the stego workshop, but I've heard it's straight forward [to solve this]() if you did see it. I've just been enjoying the music, but something about the songs seem missing...`
+const description = `Hey, I didn't see the stego workshop, but I've heard it's straight forward [to solve this](https://drive.google.com/file/d/19z9LcGzWucqdaguRQcXMVKFRb70LrMa0/view?usp=sharing) if you did see it. I've just been enjoying the music, but something about the songs seem missing...`
 
 var chall = {
-    challid: 'stego7',
+    challid: 'stego8',
     title: 'Audio Stego Adventure!!!',
     category: 'Steganography',
     points: 25,
@@ -23,7 +23,14 @@ var chall = {
 
         msg.channel.send({ embed: descEmbed })
     },
-    notes: ['Songs used in this chall:','Check out the steganography workshop ;) (slides/pdf on github)']
+    notes: ['Songs used in this chall:',
+            'Sparta - Sabaton',
+            'Don\'t stop me now - Queen',
+            'Fields of Verdun - Sabaton',
+            'Favorite Son - Green Day (Broadway version)',
+            '82nd all the way - Sabaton',
+            'Highway to Hell - AC/DC',
+            'Check out the steganography workshop ;) (slides/pdf on github)']
 }
 
 module.exports = chall
