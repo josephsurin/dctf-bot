@@ -23,7 +23,7 @@ var chall = {
 
         msg.channel.send({ embed: descEmbed })
     },
-    notes: []
+    notes: ["This sounds like something that was covered in a stego workshop..."]
 }
 
 module.exports = chall
