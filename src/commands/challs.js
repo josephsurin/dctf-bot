@@ -1,4 +1,6 @@
 const path = require('path')
+const { RichEmbed } = require('discord.js')
+const Pagination = require('discord-paginationembed')
 const { getBotConfig, hasSolvedSync } = require(path.join(__dirname, '../util/util'))
 const allChalls = require(path.join(__dirname, '../challs/index'))
 const { Chall, Player } = require(path.join(__dirname, '../../models/index'))
@@ -69,34 +71,25 @@ module.exports = async function challs(msg, args) {
 	var { plain, hideSolved, search, sort, points } = argv
     var filters = { plain, hideSolved, search, sort, points }
 
-	Chall.find().sort('challid').then(async (dbChalls) => {
-		
-		if(!dbChalls) {
-			msg.channel.send('No challenges found!')
-			return false
-		}
+    var dbChalls = await Chall.find().sort('challid')
 
-		var p = await Player.findOne({ playerid: msg.author.id })
-		var solves = p ? p.solves : undefined
-	
-		var fields = processChallsDisplay(dbChalls, filters, solves)
-	
-		var embed = {
-			title: 'Challenges List',
-			description: `
-			The flag format is \`${flagformat}\` unless otherwise specified.`,
-			fields,
-			timestamp: `${new Date().toISOString()}`,
-			footer: {
-                icon_url: msg.author.displayAvatarURL,
-                text: `${msg.author.username} ${search ? '| search: ' + search : ''} ${hideSolved ? '| Hiding solved challs' : ''} ${plain ? '| plain' : ''}` 
-            },
-			color: themecolour
-		}
+    if(!dbChalls) {
+        msg.channel.send('No challenges found!')
+        return false
+    }
 
-		msg.channel.send({ embed })
+    var p = await Player.findOne({ playerid: msg.author.id })
+    var solves = p ? p.solves : undefined
 
-	})		
+    var embeds = processChallsDisplay(dbChalls, filters, solves)
+
+    var pagEmbeds = new Pagination.Embeds()
+        .setArray(embeds)
+        .setAuthorizedUsers([msg.author.id])
+        .setChannel(msg.channel)
+        .setFooter(`${msg.author.username} ${search ? '| search: ' + search : ''} ${hideSolved ? '| Hiding solved challs' : ''} ${plain ? '| plain' : ''}`, msg.author.displayAvatarURL)
+
+    await pagEmbeds.build()
 }
 
 function parsePointsFilter(expr) {
@@ -193,38 +186,51 @@ function processChallsDisplay(dbChalls, { plain, hideSolved, search, sort, point
 	var categorySeparated = {}
 	filteredChalls.forEach(chall => {
 		if(!categorySeparated[chall.category]) {
-			categorySeparated[chall.category] = [processChallDisplay(chall)]
+			categorySeparated[chall.category] = [chall]
 		} else {
-			categorySeparated[chall.category].push(processChallDisplay(chall))
+			categorySeparated[chall.category].push(chall)
 		}
 	})
 
-	//FIELD GENERATION
-	fields = []
-	for(var cat in categorySeparated) {
-		field = {
-			name: `**__${cat}__**`,
-			value: categorySeparated[cat].join('\n'),
-			inline: true
-		}
-		fields.push(field)
-	}
+    var chunkedChalls = []
+    Object.keys(categorySeparated).forEach(cat => {
+        var ch = categorySeparated[cat]
+        var cobj = { category: cat, chall_fields: [] }
+        for(var i = 0; i < ch.length; i+=15) {
+            var challs = ch.slice(i, i+15).map(processChallDisplay)
+            var field = {
+                name: `**__${cat}__**`,
+                value: challs.join('\n'),
+                inline: true
+            }
+            cobj.chall_fields.push(field)
+        }
+        chunkedChalls.push(cobj)
+    })
 
-	if(fields.length == 0) {
-		return [{
-			name: ':tada: :tada: :tada:',
-			value: 'You\'ve solved all the current challenges!'
-		}]
-	} else {
-		return fields
-	}
+    //map the chunkedChalls array to an array of embeds
+    var embeds = chunkedChalls.map(({ category, chall_fields }) => {
+        return new RichEmbed({
+            title: 'Challenges List',
+			description: `
+			The flag format is \`${flagformat}\` unless otherwise specified.`,
+			fields: chall_fields,
+			timestamp: `${new Date().toISOString()}`,
+			color: themecolour
+        })
+    })
 
-	function processChallDisplay(chall) {
-		let { challid, title, points, solves } = chall
-		var display = `**${challid}**: ${title} [${points}] - ${solves.length} solves`
-		if(!plain && playerSolves && hasSolvedSync(playerSolves, challid)) {
-			display += ':white_check_mark:'
-		}
-		return display
-	}
+    return embeds
+
+    function processChallDisplay(chall) {
+        if(!chall.solves) {
+            console.log(chall)
+        }
+        let { challid, title, points, solves } = chall
+        var display = `**${challid}**: ${title} [${points}] - ${solves.length} solves`
+        if(!plain && playerSolves && hasSolvedSync(playerSolves, challid)) {
+            display += ':white_check_mark:'
+        }
+        return display
+    }
 }
