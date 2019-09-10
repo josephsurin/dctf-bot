@@ -38,7 +38,7 @@ module.exports = async function writeups(msg, args) {
 
     var embed = {
         title: `Writeups for ${title} (${challid} [${points}])`,
-        description: links.join("\n"),
+        description: filteredWriteups.join("\n"),
         timestamp: new Date().toISOString(),
         color: themecolour
     }
