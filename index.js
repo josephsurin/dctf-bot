@@ -8,7 +8,7 @@ global.djsclient = client
 const { getBotConfig } = require(path.join(__dirname, './src/util/util'))
 const { cmdprefix } = getBotConfig()
 
-if (process.env.MODE != 'prod') {
+if(process.env.MODE != 'prod') {
 	require('dotenv').config()
 }
 
@@ -29,9 +29,9 @@ const commands = require(path.join(__dirname, './src/commands/index'))
 const commandsList = Object.keys(commands)
 
 client.on('message', msg => {
-	if (msg.content.startsWith(cmdprefix)) {
+	if(msg.content.startsWith(cmdprefix)) {
 		var command = msg.content.split(cmdprefix)[1].split(' ')[0]
-		if (commandsList.includes(command)) {
+		if(commandsList.includes(command)) {
 			console.log('COMMAND LOG:', msg.author.username + '#' + msg.author.discriminator, msg.content)
 			var args = msg.content.split(' ').slice(1)
 			commands[command](msg, args)

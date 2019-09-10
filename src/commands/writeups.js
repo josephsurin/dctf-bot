@@ -1,36 +1,37 @@
-const path = require("path");
-const { getBotConfig } = require(path.join(__dirname, "../util/util"));
-const allChalls = require(path.join(__dirname, "../challs/index"));
-const csv = require('csvtojson');
+const path = require("path")
+const { getBotConfig } = require(path.join(__dirname, "../util/util"))
+const allChalls = require(path.join(__dirname, "../challs/index"))
+const csv = require('csvtojson')
 
-const csvFilePath = "writeups.csv"
+const csvFilePath = "../writeups.csv"
+var writeupJsonArray
+(async () => {
+    writeupJsonArray = await csv().fromFile(path.join(__dirname, csvFilePath))
+})()
 
-const { themecolour } = getBotConfig();
+const { themecolour } = getBotConfig()
 
 module.exports = async function writeups(msg, args) {
   /*
         Displays writeups for a given challenge
     */
 
-  var challid = args[0];
-  var challData = allChalls[challid];
+  var challid = args[0]
+  var challData = allChalls[challid]
 
   if (!challData) {
-    msg.channel.send("Invalid challenge id!");
-    return false;
+    msg.channel.send("Invalid challenge id!")
+    return false
   }
 
-
-  let writeupJsonArray = await csv().fromFile(csvFilePath);
 
   writeupJsonArray = writeupJsonArray.filter(function (writeup) {
     return writeup.chall == challid
   })
 
-
   if (!(writeupJsonArray.length)) {
     msg.channel.send(`${challid} doesn't have any writeups yet! Solve the challenge and add one!`);
-    return false;
+    return false
   }
 
   var { title, points } = challData
