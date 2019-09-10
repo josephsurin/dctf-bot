@@ -27,7 +27,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true })
 //Command handling
 const commands = require(path.join(__dirname, './src/commands/index'))
 const commandsList = Object.keys(commands)
-console.log(commandsList)
+
 client.on('message', msg => {
 	if (msg.content.startsWith(cmdprefix)) {
 		var command = msg.content.split(cmdprefix)[1].split(' ')[0]

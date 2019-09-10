@@ -27,7 +27,7 @@ module.exports = async function writeups(msg, args) {
     return writeup.chall == challid
   })
 
-  console.log(writeupJsonArray)
+
   if (!(writeupJsonArray.length)) {
     msg.channel.send(`${challid} doesn't have any writeups yet! Solve the challenge and add one!`);
     return false;
@@ -38,7 +38,7 @@ module.exports = async function writeups(msg, args) {
   const links = writeupJsonArray
     .map(x => `[${x.name}](${x.link})`)
 
-  console.log(links.join("\n"))
+
 
   var embed = {
     title: `Writeups for ${title} (${challid} [${points}])`,
