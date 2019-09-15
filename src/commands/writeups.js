@@ -12,41 +12,36 @@ var writeupJsonArray
 const { themecolour } = getBotConfig()
 
 module.exports = async function writeups(msg, args) {
-  /*
+   /*
         Displays writeups for a given challenge
-    */
+   */
 
-  var challid = args[0]
-  var challData = allChalls[challid]
+    var challid = args[0]
+    var challData = allChalls[challid]
 
-  if (!challData) {
-    msg.channel.send("Invalid challenge id!")
-    return false
-  }
-
-
-  writeupJsonArray = writeupJsonArray.filter(function (writeup) {
-    return writeup.chall == challid
-  })
-
-  if (!(writeupJsonArray.length)) {
-    msg.channel.send(`${challid} doesn't have any writeups yet! Solve the challenge and add one!`);
-    return false
-  }
-
-  var { title, points } = challData
-
-  const links = writeupJsonArray
-    .map(x => `[${x.name}](${x.link})`)
+    if (!challData) {
+        msg.channel.send("Invalid challenge id!")
+        return false
+    }
 
 
+    var filteredWriteups = writeupJsonArray
+        .filter(({chall}) => chall == challid)
+        .map(({name, link}) => `[${name}](${link})`)
 
-  var embed = {
-    title: `Writeups for ${title} (${challid} [${points}])`,
-    description: links.join("\n"),
-    timestamp: new Date().toISOString(),
-    color: themecolour
-  };
+    if (!filteredWriteups) {
+        msg.channel.send(`${challid} doesn't have any writeups yet! Solve the challenge and add one!`);
+        return false
+    }
 
-  msg.channel.send({ embed });
-};
+    var { title, points } = challData
+
+    var embed = {
+        title: `Writeups for ${title} (${challid} [${points}])`,
+        description: filteredWriteups.join("\n"),
+        timestamp: new Date().toISOString(),
+        color: themecolour
+    }
+
+    msg.channel.send({ embed })
+}

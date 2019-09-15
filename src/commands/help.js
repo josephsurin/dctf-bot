@@ -19,6 +19,7 @@ Available Commands:
 	${cmdprefix}leaderboard - displays the global leaderboard
 	${cmdprefix}solves <challid> - displays the solvers and their time of solving for a challenge
 	${cmdprefix}notes <challid> - displays notes/resources/hints for a challenge (only use this if you're stuck!)
+	${cmdprefix}writeups <challid> - displays user contributed writeups for a challenge (you will need the flag to view it)
 	${cmdprefix}about - displays information about the bot\`\`\``)
 
 }
