@@ -10,7 +10,7 @@ var chall = {
     challid: 'stego4',
     title: 'Kimi no Na wa.',
     category: 'Steganography',
-    points: 95,
+    points: 85,
     authorid: '111028987836313600',
     authorName: 'Joseph',
     flag: 'b7b5beb4f0e423567b0dd1347b0d1889e162654ac6faddc4e75e669dbf7711ed',
