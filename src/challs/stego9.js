@@ -3,7 +3,7 @@ const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/ut
 const { themecolour } = getBotConfig()
 
 const description = `
-I only like [squares](https://drive.google.com/open?id=1t32f76zyi_Ji1M96IlJO9a7PytCRVTwS`
+I only like [squares](https://drive.google.com/open?id=1t32f76zyi_Ji1M96IlJO9a7PytCRVTwS)`
 
 var chall = {
     challid: 'stego9',
