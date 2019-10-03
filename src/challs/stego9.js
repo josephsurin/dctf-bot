@@ -10,7 +10,7 @@ var chall = {
     title: 'Square up',
     category: 'Steganography',
     points: 36,
-    authorid: '379769327106260992'
+    authorid: '379769327106260992',
     authorName: 'Chuanshu',
     flag: '9f163d6095764befaac9ac5d9434a95fc420052a9677fd9733693ca305c1fe13',
     description,
