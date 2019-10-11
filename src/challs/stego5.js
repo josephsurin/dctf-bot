@@ -2,34 +2,16 @@ const path = require('path')
 const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/util'))
 const { themecolour } = getBotConfig()
 
-const description = `
-I've learnt my lesson about small public exponents...
-
-The values are [here](https://paste.ee/r/bIdhw/0).
-
-\`\`\`python
-from Crypto.Util.number import getPrime, bytes_to_long
-flag = b'MISCCTF{i dont think this is the flag}'
-assert(len(flag) < 50)
-
-p, q = getPrime(1024), getPrime(1024)
-n = p * q
-e = 3
-
-padded = flag.ljust(256, b'\\x00')
-m = bytes_to_long(padded)
-
-c = pow(m, e, n)
-\`\`\``
+const description = `Unicode is so cool right!? [Here's](https://drive.google.com/open?id=1ALCsXmZV-AmCRKVEXhFz7s2Lt7pUn4WU) the introduction for the specification!`
 
 var chall = {
-    challid: 'crypto7',
-    title: 'RSA Level 4',
-    category: 'Cryptography',
-    points: 30,
+    challid: 'stego5',
+    title: 'ᑌ ᑎ I ᑕ O ᗪ E',
+    category: 'Steganography',
+    points: 45,
     authorid: '111028987836313600',
     authorName: 'Joseph',
-    flag: '6e42cd94487796b7332a38aa5f78d6bc376a971adb60806172a745a58941c0eb',
+    flag: '8912b4a0323ebb4eb4859048ca12bd6d1bfa0ea3e02398839671cd8433fc73a5',
     description,
     desc: async function(msg) {
 
@@ -41,7 +23,7 @@ var chall = {
 
         msg.channel.send({ embed: descEmbed })
     },
-    notes: []
+    notes: ['https://en.wikipedia.org/wiki/Steganography#Digital_text', 'One dimensional binary?']
 }
 
 module.exports = chall

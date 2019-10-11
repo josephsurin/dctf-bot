@@ -3,33 +3,19 @@ const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/ut
 const { themecolour } = getBotConfig()
 
 const description = `
-I've learnt my lesson about small public exponents...
+My jumbled flag printing [program](https://drive.google.com/open?id=1reOoCYHeXE2NzTk84KyfodPqjxKryden) keeps segfaulting and I can't figure out why! :slight_frown:
 
-The values are [here](https://paste.ee/r/bIdhw/0).
-
-\`\`\`python
-from Crypto.Util.number import getPrime, bytes_to_long
-flag = b'MISCCTF{i dont think this is the flag}'
-assert(len(flag) < 50)
-
-p, q = getPrime(1024), getPrime(1024)
-n = p * q
-e = 3
-
-padded = flag.ljust(256, b'\\x00')
-m = bytes_to_long(padded)
-
-c = pow(m, e, n)
-\`\`\``
+Can you help me fix it?
+`
 
 var chall = {
-    challid: 'crypto7',
-    title: 'RSA Level 4',
-    category: 'Cryptography',
-    points: 30,
+    challid: 'rev5',
+    title: 'Segfault',
+    category: 'Reversing',
+    points: 15,
     authorid: '111028987836313600',
     authorName: 'Joseph',
-    flag: '6e42cd94487796b7332a38aa5f78d6bc376a971adb60806172a745a58941c0eb',
+    flag: '94859f96644f8429895e6c42e291c11f49f399c3cdc0a8db086320b54073c91b',
     description,
     desc: async function(msg) {
 

@@ -2,34 +2,18 @@ const path = require('path')
 const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/util'))
 const { themecolour } = getBotConfig()
 
-const description = `
-I've learnt my lesson about small public exponents...
+const description = `[Something happened to my wav file](https://drive.google.com/open?id=1-PJYVQhIIKixV6WWDUTVIGm79v-mbT2N) and now there are screeches all over the place :slight_frown:
 
-The values are [here](https://paste.ee/r/bIdhw/0).
-
-\`\`\`python
-from Crypto.Util.number import getPrime, bytes_to_long
-flag = b'MISCCTF{i dont think this is the flag}'
-assert(len(flag) < 50)
-
-p, q = getPrime(1024), getPrime(1024)
-n = p * q
-e = 3
-
-padded = flag.ljust(256, b'\\x00')
-m = bytes_to_long(padded)
-
-c = pow(m, e, n)
-\`\`\``
+It seems so mechanical and exact though... maybe it's the universe trying to tell me something :thinking:`
 
 var chall = {
-    challid: 'crypto7',
-    title: 'RSA Level 4',
-    category: 'Cryptography',
-    points: 30,
+    challid: 'stego4',
+    title: 'Kimi no Na wa.',
+    category: 'Steganography',
+    points: 85,
     authorid: '111028987836313600',
     authorName: 'Joseph',
-    flag: '6e42cd94487796b7332a38aa5f78d6bc376a971adb60806172a745a58941c0eb',
+    flag: 'b7b5beb4f0e423567b0dd1347b0d1889e162654ac6faddc4e75e669dbf7711ed',
     description,
     desc: async function(msg) {
 
@@ -41,7 +25,7 @@ var chall = {
 
         msg.channel.send({ embed: descEmbed })
     },
-    notes: []
+    notes: ['Use headphones!', 'https://www.sonicvisualiser.org/']
 }
 
 module.exports = chall

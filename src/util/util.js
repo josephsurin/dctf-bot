@@ -18,6 +18,11 @@ function ordinalSuffix(num) {
 	return num.toString() + suffix
 }
 
+function getMaxPoints() {
+    const allChalls = require(path.join(__dirname, '../challs/index'))
+    return Object.values(allChalls).reduce((acc,  { points }) => acc + points, 0)
+}
+
 function getTotalPoints(solves) {
 	const allChalls = require(path.join(__dirname, '../challs/index'))
 	return solves.reduce((acc, { challid }) => acc + allChalls[challid].points, 0)
@@ -100,6 +105,7 @@ function hasSolvedSync(solves, challid) {
 module.exports = {
 	getBotConfig,
 	ordinalSuffix,
+    getMaxPoints,
 	getTotalPoints,
 	filterAlphanumeric,
 	genChallEmbed,

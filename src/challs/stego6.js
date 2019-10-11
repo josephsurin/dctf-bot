@@ -2,17 +2,16 @@ const path = require('path')
 const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/util'))
 const { themecolour } = getBotConfig()
 
-const description = `
-[It's 2019, and he's back to wreck you with Chuck Norris Facts.](https://drive.google.com/open?id=1cg2E2UZ6oFalz04lpha9GsoooelSmIlm)`
+const description = `Not too long ago, a guy, let's call him SMA, introduced me to the world of pixels puzzles. I now suffer from "pixel traumatic stress disorder". There'll be a series of puzzles summarising the kinds of puzzles I encountered, but it all began with a puzzle like [this](https://drive.google.com/file/d/10ok0gFyGnMmcvYuwPjEttfnGORtj475X/view?usp=sharing).`
 
 var chall = {
-    challid: 'stego3',
-    title: 'Look! Chuck Norris!',
+    challid: 'stego6',
+    title: 'PTSD 1: The Beginning',
     category: 'Steganography',
-    points: 20,
+    points: 10,
     authorid: '275149655166287872',
     authorName: 'Annie',
-    flag: '3ae7e3517895d8119ef9266bac550fa78533b0702d316e2fe21adef690a3286a',
+    flag: 'b4112d44dd623173c09698d011088576cfc98bc0bc39626ce0ef55aec522a009',
     description,
     desc: async function(msg) {
 
@@ -24,7 +23,7 @@ var chall = {
 
         msg.channel.send({ embed: descEmbed })
     },
-    notes: ["I don't have a huge crush on Chuck Norris at all. But there is a reason why he's plastered all over this challenge. Google is your friend."]
+    notes: ["This sounds like something that was covered in a stego workshop..."]
 }
 
 module.exports = chall

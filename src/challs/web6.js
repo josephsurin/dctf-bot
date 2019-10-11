@@ -1,35 +1,20 @@
 const path = require('path')
 const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/util'))
-const { themecolour } = getBotConfig()
+const { cmdprefix, themecolour } = getBotConfig()
 
 const description = `
-I've learnt my lesson about small public exponents...
+:hushed: :drooling_face: :sunglasses: :see_no_evil: :computer: :keyboard: :syringe: :smirk_cat: :japanese_goblin:
 
-The values are [here](https://paste.ee/r/bIdhw/0).
-
-\`\`\`python
-from Crypto.Util.number import getPrime, bytes_to_long
-flag = b'MISCCTF{i dont think this is the flag}'
-assert(len(flag) < 50)
-
-p, q = getPrime(1024), getPrime(1024)
-n = p * q
-e = 3
-
-padded = flag.ljust(256, b'\\x00')
-m = bytes_to_long(padded)
-
-c = pow(m, e, n)
-\`\`\``
+https://emoji-combiner-ctf.herokuapp.com/`
 
 var chall = {
-    challid: 'crypto7',
-    title: 'RSA Level 4',
-    category: 'Cryptography',
-    points: 30,
+    challid: 'web6',
+    title: 'Emoji Combiner',
+    category: 'Web',
+    points: 50,
     authorid: '111028987836313600',
     authorName: 'Joseph',
-    flag: '6e42cd94487796b7332a38aa5f78d6bc376a971adb60806172a745a58941c0eb',
+    flag: 'a70377a70c470a6bec29e940eeec7ff53537c42b43b4fbfe47e64d6a339e31b4',
     description,
     desc: async function(msg) {
 

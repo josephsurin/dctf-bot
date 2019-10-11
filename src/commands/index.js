@@ -9,6 +9,8 @@ const notes = require(path.join(__dirname, './notes'))
 const about = require(path.join(__dirname, './about'))
 const vote = require(path.join(__dirname, './vote'))
 const solves = require(path.join(__dirname, './solves'))
+const say = require(path.join(__dirname, './say'))
+const writeups = require(path.join(__dirname, './writeups'))
 
 module.exports = {
 	challs,
@@ -20,5 +22,7 @@ module.exports = {
 	notes,
 	about,
 	vote,
-	solves
+	solves,
+	say,
+	writeups
 }

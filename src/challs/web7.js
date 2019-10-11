@@ -1,35 +1,20 @@
 const path = require('path')
 const { getBotConfig, genChallEmbed } = require(path.join(__dirname, '../util/util'))
-const { themecolour } = getBotConfig()
+const { cmdprefix, themecolour } = getBotConfig()
 
 const description = `
-I've learnt my lesson about small public exponents...
+A website that gives you a nice cat image everytime you log in! Just what you wanted right?
 
-The values are [here](https://paste.ee/r/bIdhw/0).
-
-\`\`\`python
-from Crypto.Util.number import getPrime, bytes_to_long
-flag = b'MISCCTF{i dont think this is the flag}'
-assert(len(flag) < 50)
-
-p, q = getPrime(1024), getPrime(1024)
-n = p * q
-e = 3
-
-padded = flag.ljust(256, b'\\x00')
-m = bytes_to_long(padded)
-
-c = pow(m, e, n)
-\`\`\``
+http://miscctf-web.herokuapp.com/web7`
 
 var chall = {
-    challid: 'crypto7',
-    title: 'RSA Level 4',
-    category: 'Cryptography',
-    points: 30,
+    challid: 'web7',
+    title: 'Cat Images',
+    category: 'Web',
+    points: 40,
     authorid: '111028987836313600',
     authorName: 'Joseph',
-    flag: '6e42cd94487796b7332a38aa5f78d6bc376a971adb60806172a745a58941c0eb',
+    flag: '22418bc027600cb449f21338c681586c58bf7acd7e996ae46071b04a47a5041a',
     description,
     desc: async function(msg) {
 
